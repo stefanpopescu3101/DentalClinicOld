@@ -12,8 +12,6 @@ import javax.persistence.*;
 @Table(name ="service")
 public class Service {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name ="uuid2", strategy = "uuid2")
     @Column(length = 36)
     private Integer id;
 

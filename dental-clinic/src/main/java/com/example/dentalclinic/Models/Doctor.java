@@ -10,8 +10,6 @@ import java.util.Date;
 @Table(name ="doctor")
 public class Doctor {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name ="uuid2", strategy = "uuid2")
     @Column(length = 36)
     private Integer id;
 
