@@ -4,10 +4,11 @@ import "./App.css";
 import Home from "./pages/home";
 import News from './pages/news';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import {Switch} from "@nextui-org/react";
+import {NextUIProvider, Switch} from "@nextui-org/react";
 
 function App() {
   return (
+      <NextUIProvider>
       <div className="app-container">
 
         <Router>
@@ -19,6 +20,7 @@ function App() {
             </Switch>
         </Router>
       </div>
+      </NextUIProvider>
   );
 }
 

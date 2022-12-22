@@ -24,7 +24,6 @@ public class TreatmentController {
         this.service=service;
     }
 
-    //GET at /news
     @GetMapping
     public ResponseEntity<List<TreatmentDTO>> getAllTreatments()
     {
@@ -40,7 +39,6 @@ public class TreatmentController {
         }
 
     }
-    //GET at news/1 e…g
     @GetMapping("{id}")
     public ResponseEntity<TreatmentDTO> getTreatmentById(@PathVariable(value = "id")  Integer id) {
         TreatmentDTO treatment = service.getTreatmentById(id);
@@ -53,7 +51,6 @@ public class TreatmentController {
 
     }
 
-    //POST at http://localhost:8080/news
     @PostMapping()
     public ResponseEntity<TreatmentDTO> addTreatment(@RequestBody TreatmentDTO treatment) {
         if (treatment == null) {
@@ -64,7 +61,6 @@ public class TreatmentController {
         }
 
     }
-    //DELETE at http://localhost:XXXX/news/
     @DeleteMapping("{id}")
     public ResponseEntity<TreatmentDTO> deleteTreatment(@PathVariable("id") Integer id) {
         service.deleteTreatment(id);
@@ -72,9 +68,8 @@ public class TreatmentController {
 
     }
 
-    //PUT at http://localhost:XXXX/news/
     @PutMapping()
-    public ResponseEntity<TreatmentDTO> editDoctor(@RequestBody TreatmentDTO treatment)
+    public ResponseEntity<TreatmentDTO> editTreatment(@RequestBody TreatmentDTO treatment)
     {
         if(service.editTreatment(treatment))
         {

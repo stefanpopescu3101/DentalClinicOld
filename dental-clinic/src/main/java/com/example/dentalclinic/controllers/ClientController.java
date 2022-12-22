@@ -24,7 +24,6 @@ public class ClientController {
         this.service=service;
     }
 
-    //GET at /news
     @GetMapping
     public ResponseEntity<List<ClientDTO>> getAllClients()
     {
@@ -40,7 +39,7 @@ public class ClientController {
         }
 
     }
-    //GET at news/1 e…g
+
     @GetMapping("{id}")
     public ResponseEntity<ClientDTO> getClientById(@PathVariable(value = "id")  Integer id) {
         ClientDTO client = service.getClientById(id);
@@ -53,7 +52,6 @@ public class ClientController {
 
     }
 
-    //POST at http://localhost:8080/news
     @PostMapping()
     public ResponseEntity<ClientDTO> addClient(@RequestBody ClientDTO client) {
         if (client == null) {
@@ -64,7 +62,7 @@ public class ClientController {
         }
 
     }
-    //DELETE at http://localhost:XXXX/news/
+
     @DeleteMapping("{id}")
     public ResponseEntity<ClientDTO> deleteClient(@PathVariable("id") Integer id) {
         service.deleteClient(id);
@@ -72,7 +70,6 @@ public class ClientController {
 
     }
 
-    //PUT at http://localhost:XXXX/news/
     @PutMapping()
     public ResponseEntity<ClientDTO> editClient(@RequestBody ClientDTO client)
     {

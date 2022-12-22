@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 @Service
 @Transactional
-public class TreatmentService implements ITreatmentService {
+public class    TreatmentService implements ITreatmentService {
     private final ITreatmentDAL data;
     private final TreatmentConverter converter;
     @Autowired

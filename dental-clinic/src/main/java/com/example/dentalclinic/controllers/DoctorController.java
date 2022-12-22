@@ -25,7 +25,6 @@ public class DoctorController {
         this.service=service;
     }
 
-    //GET at /news
     @GetMapping
     public ResponseEntity<List<DoctorDTO>> getAllDoctors()
     {
@@ -41,7 +40,6 @@ public class DoctorController {
         }
 
     }
-    //GET at news/1 e…g
     @GetMapping("{id}")
     public ResponseEntity<DoctorDTO> getDoctorById(@PathVariable(value = "id")  Integer id) {
         DoctorDTO doctor = service.getDoctorById(id);
@@ -54,7 +52,6 @@ public class DoctorController {
 
     }
 
-    //POST at http://localhost:8080/news
     @PostMapping()
     public ResponseEntity<DoctorDTO> addDoctor(@RequestBody DoctorDTO doctor) {
         if (doctor == null) {
@@ -65,7 +62,7 @@ public class DoctorController {
         }
 
     }
-    //DELETE at http://localhost:XXXX/news/
+
     @DeleteMapping("{id}")
     public ResponseEntity<DoctorDTO> deleteDoctor(@PathVariable("id") Integer id) {
         service.deleteDoctor(id);
@@ -73,7 +70,6 @@ public class DoctorController {
 
     }
 
-    //PUT at http://localhost:XXXX/news/
     @PutMapping()
     public ResponseEntity<DoctorDTO> editDoctor(@RequestBody DoctorDTO doctor)
     {
