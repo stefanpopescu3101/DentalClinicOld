@@ -1,15 +1,13 @@
 import React from 'react';
-import { NextUIProvider } from '@nextui-org/react';
 
 
 const Home = () => {
-    return (
-        <NextUIProvider>
-            <div>
-                <p>dadaadadadada</p>
-            </div>
-        </NextUIProvider>
-    );
+    return(
+        <form>
+            <input type="email" placeholder='your email here'/>
+            <input placeholder='display name'/>
+            <input type="password" placeholder='your password here'/>
+        </form>
+    )
 }
-
 export default Home;

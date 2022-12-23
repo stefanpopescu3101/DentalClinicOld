@@ -1,26 +1,20 @@
 import React from "react";
-import Navbar from "./components/Navbar/NavBar";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Home from "./pages/home";
-import News from './pages/news';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import {NextUIProvider, Switch} from "@nextui-org/react";
+import NavBar from "./components/Navbar/Navbar";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import News from "./pages/news";
 
 function App() {
   return (
-      <NextUIProvider>
       <div className="app-container">
-
         <Router>
+            <NavBar/>
             <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/news" exact component={News} />
-
-
+            <Route path="/news" component={News} />
             </Switch>
         </Router>
       </div>
-      </NextUIProvider>
   );
 }
 
