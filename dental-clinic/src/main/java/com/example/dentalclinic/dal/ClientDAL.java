@@ -1,40 +1,85 @@
 package com.example.dentalclinic.dal;
 
 import com.example.dentalclinic.Models.Client;
+import com.example.dentalclinic.Models.Role;
 import com.example.dentalclinic.dalInterfaces.IClientDAL;
 import com.example.dentalclinic.repoInterfaces.IClientRepository;
+import com.example.dentalclinic.repoInterfaces.IRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Repository @Transactional
-public class ClientDAL implements IClientDAL
+public class ClientDAL implements IClientDAL, UserDetailsService
 {
+    private final IClientRepository userRepo;
+    private final IRoleRepository roleRepo;
+    private final PasswordEncoder encoder;
 
-    private IClientRepository repo;
     @Autowired
-    public ClientDAL(IClientRepository repo)
+    public ClientDAL(IClientRepository userRepo, IRoleRepository roleRepo, PasswordEncoder encoder)
     {
-        this.repo=repo;
+        this.userRepo = userRepo;
+        this.roleRepo = roleRepo;
+        this.encoder = encoder;
     }
 
     @Override
     public List<Client> getAllClients() {
-        return repo.findAll();
+        return userRepo.findAll();
     }
 
     @Override
     public Client getClientById(Integer id) {
-        return repo.findById(id).get();
+        return userRepo.findById(id).get();
+    }
+
+    @Override
+    public Client getUser(String username) {
+        return userRepo.findByUsername(username);
+    }
+
+    @Override
+    public Role saveRole(Role role) {
+        return roleRepo.save(role);
+    }
+
+    @Override
+    public void addRole(String username, String roleName) {
+        Client client = userRepo.findByUsername(username);
+        Role role = roleRepo.findByName(roleName);
+        client.getRoles().add(role);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Client client = userRepo.findByUsername(username);
+        if(client == null)
+        {
+            throw new UsernameNotFoundException("User not found");
+        }
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        client.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
+
+        return new org.springframework.security.core.userdetails.User(client.getUsername(),client.getPassword(),authorities);
     }
 
     @Override
     public boolean addClient(Client client) {
         if(client != null)
         {
-            repo.save(client);
+            client.setPassword(encoder.encode(client.getPassword()));
+            userRepo.save(client);
             return true;
         }
         return  false;
@@ -48,7 +93,7 @@ public class ClientDAL implements IClientDAL
             updatedClient.setLastName(client.getLastName());
             updatedClient.setPhone(client.getPhone());
             updatedClient.setEmail(client.getEmail());
-            repo.save(updatedClient);
+            userRepo.save(updatedClient);
             return true;
         }
         return false;
@@ -58,7 +103,7 @@ public class ClientDAL implements IClientDAL
     public boolean deleteClient(Integer id) {
         if(getClientById(id).getId() == id)
         {
-            repo.delete(getClientById(id));
+            userRepo.delete(getClientById(id));
             return true;
         }
         return false;

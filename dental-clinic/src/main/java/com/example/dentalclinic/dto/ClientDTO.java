@@ -10,6 +10,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class ClientDTO {
     private Integer id;
+    private String username;
+    private String password;
     private String firstName;
     private String lastName;
     private String sex;
@@ -17,4 +19,7 @@ public class ClientDTO {
     private Integer phone;
     private String email;
     private Boolean verified;
+
+
+
 }

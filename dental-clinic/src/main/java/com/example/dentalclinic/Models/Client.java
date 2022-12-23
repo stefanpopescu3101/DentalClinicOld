@@ -1,8 +1,13 @@
 package com.example.dentalclinic.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 
@@ -13,6 +18,12 @@ public class Client {
     @Id
     @Column(length = 36)
     private Integer id;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name="password")
+    private String password;
 
     @Column(name = "firstName")
     private String firstName;
@@ -37,6 +48,10 @@ public class Client {
 
     @Column(name = "verified")
     private Boolean verified;
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles = new ArrayList<>();
 
     public Client(){
 
@@ -112,6 +127,30 @@ public class Client {
 
     public void setVerified(Boolean verified) {
         this.verified = verified;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     public Client(Integer id, String firstName, String lastName, String sex, String birthday, Integer cnp, Integer phone, String email, boolean verified)

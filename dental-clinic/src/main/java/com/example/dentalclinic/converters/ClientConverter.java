@@ -16,6 +16,8 @@ public class ClientConverter {
     {
         ClientDTO dto  = new ClientDTO();
         dto.setId(client.getId());
+        dto.setUsername(client.getUsername());
+        dto.setPassword(client.getPassword());
         dto.setFirstName(client.getFirstName());
         dto.setLastName(client.getLastName());
         dto.setSex(client.getSex());
@@ -36,6 +38,8 @@ public class ClientConverter {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Client entity = new Client();
         entity.setId(dto.getId());
+        entity.setUsername(dto.getUsername());
+        entity.setPassword(dto.getPassword());
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setSex(dto.getSex());

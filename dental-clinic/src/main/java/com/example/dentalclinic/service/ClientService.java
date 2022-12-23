@@ -1,6 +1,7 @@
 package com.example.dentalclinic.service;
 
 import com.example.dentalclinic.Models.Client;
+import com.example.dentalclinic.Models.Role;
 import com.example.dentalclinic.converters.ClientConverter;
 import com.example.dentalclinic.dalInterfaces.IClientDAL;
 import com.example.dentalclinic.dto.ClientDTO;
@@ -32,6 +33,21 @@ public class ClientService implements IClientService {
     @Override
     public ClientDTO getClientById(Integer id) {
         return converter.entityToDto(data.getClientById(id));
+    }
+
+    @Override
+    public Client getClient(String username) {
+        return data.getUser(username);
+    }
+
+    @Override
+    public Role saveRole(Role role) {
+        return data.saveRole(role);
+    }
+
+    @Override
+    public void addRole(String username, String roleName) {
+
     }
 
     @Override
