@@ -93,7 +93,7 @@ const NavBar = () => {
                                     </Nav.Link>
                                 </Nav>
                                 <Nav>
-                                    <Nav.Link href="/schedule" id="schedule">
+                                    <Nav.Link href="/treatments" id="treatments">
                                         <HealingIcon /> Treatments
                                     </Nav.Link>
                                 </Nav>

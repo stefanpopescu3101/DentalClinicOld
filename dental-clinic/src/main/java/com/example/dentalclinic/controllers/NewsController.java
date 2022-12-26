@@ -23,7 +23,6 @@ public class NewsController {
         this.service=service;
     }
 
-    //GET at /news
     @GetMapping
     public ResponseEntity<List<NewsDTO>> getAllNews()
     {
@@ -39,7 +38,7 @@ public class NewsController {
         }
 
     }
-    //GET at news/1 e…g
+
     @GetMapping("{id}")
     public ResponseEntity<NewsDTO> getNewsById(@PathVariable(value = "id")  Integer id) {
         NewsDTO news = service.getNewsById(id);
@@ -52,7 +51,6 @@ public class NewsController {
 
     }
 
-    //POST at http://localhost:8080/news
     @PostMapping()
     public ResponseEntity<NewsDTO> addNews(@RequestBody NewsDTO news) {
         if (news == null) {
@@ -63,7 +61,7 @@ public class NewsController {
         }
 
     }
-    //DELETE at http://localhost:XXXX/news/
+
     @DeleteMapping("{id}")
     public ResponseEntity<NewsDTO> deleteNews(@PathVariable("id") Integer id) {
         service.deletePost(id);
@@ -71,7 +69,6 @@ public class NewsController {
 
     }
 
-    //PUT at http://localhost:XXXX/news/
     @PutMapping()
     public ResponseEntity<NewsDTO> editNews(@RequestBody NewsDTO news)
     {

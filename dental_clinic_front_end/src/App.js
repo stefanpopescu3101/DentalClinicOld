@@ -4,6 +4,7 @@ import "./App.css";
 import NavBar from "./components/Navbar/Navbar";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import News from "./pages/news";
+import Treatments from "./pages/treatments";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
         <Router>
             <NavBar/>
             <Switch>
-            <Route path="/news" component={News} />
+                <Route path = "/news" render={() => <News />} />
+                <Route path = "/treatments" render={() => <Treatments />} />
             </Switch>
         </Router>
       </div>

@@ -5,7 +5,8 @@ const TREATMENTS_API_BASE_URL = "http://localhost:8080/treatments";
 
 class TreatmentService {
     async getTreatments() {
-        return await axios.get(TREATMENTS_API_BASE_URL);
+        console.log(axios.get(TREATMENTS_API_BASE_URL));
+        return axios.get(TREATMENTS_API_BASE_URL);
     }
     async getTreatmentById(treatmentID) {
         return await axios.get(TREATMENTS_API_BASE_URL + "/" + treatmentID);
