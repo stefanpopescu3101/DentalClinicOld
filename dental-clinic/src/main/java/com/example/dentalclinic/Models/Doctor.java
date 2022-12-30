@@ -1,10 +1,10 @@
 package com.example.dentalclinic.Models;
 
-import org.hibernate.annotations.GenericGenerator;
-
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
-import java.util.Date;
-
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table(name ="doctor")
@@ -26,7 +26,7 @@ public class Doctor {
     private String sex;
 
     @Column(name = "birthday")
-    private Date birthday;
+    private String birthday;
 
     @Column(name = "cnp")
     private Integer cnp;
@@ -40,6 +40,8 @@ public class Doctor {
     @Column(name = "admin")
     private Boolean admin;
 
+    @ManyToMany(cascade= {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
+    private @Getter @Setter Collection<Treatment> treatments = new ArrayList<>();
 
     public Doctor() {
 
@@ -85,11 +87,11 @@ public class Doctor {
         this.sex = sex;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -126,7 +128,7 @@ public class Doctor {
     }
 
     public Doctor(Integer id, String title, String firstName, String lastName, String sex,
-                  Date birthday, Integer cnp, Integer phone, String email, Boolean admin)
+                  String birthday, Integer cnp, Integer phone, String email, Boolean admin)
     {
         this.id = id;
         this.title = title;

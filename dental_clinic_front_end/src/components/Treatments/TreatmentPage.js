@@ -16,7 +16,7 @@ function TreatmentPage() {
     return (
         <div>
             {AuthService.getCurrentUser() === null && (
-                <TreatmentList treatments={treatments}>{console.log(treatments)}</TreatmentList>
+                <TreatmentList treatments={treatments}></TreatmentList>
             )}
         </div>
     );

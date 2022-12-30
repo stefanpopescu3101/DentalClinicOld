@@ -5,7 +5,7 @@ const TREATMENTS_API_BASE_URL = "http://localhost:8080/treatments";
 
 class TreatmentService {
     async getTreatments() {
-        console.log(axios.get(TREATMENTS_API_BASE_URL));
+
         return axios.get(TREATMENTS_API_BASE_URL);
     }
     async getTreatmentById(treatmentID) {
@@ -17,8 +17,8 @@ class TreatmentService {
                 headers: authHeader()});
         }
 
-    async editTreatment(movie) {
-        return axios.put(TREATMENTS_API_BASE_URL, movie, {
+    async editTreatment(treatment) {
+        return axios.put(TREATMENTS_API_BASE_URL, treatment, {
             headers: authHeader()
         });
     }

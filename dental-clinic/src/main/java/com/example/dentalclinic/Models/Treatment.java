@@ -1,9 +1,14 @@
 package com.example.dentalclinic.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @NoArgsConstructor
@@ -11,18 +16,11 @@ import javax.persistence.*;
 @Table(name ="service")
 public class Treatment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 36)
     private Integer id;
-
     @Column(name = "title")
     private String title;
-
-    @Column(name = "doctorID")
-    private Integer doctorID;
-
-    @Column(name = "doctorName")
-    private String doctorName;
-
     @Column(name = "duration")
     private Integer duration;
 
@@ -30,6 +28,10 @@ public class Treatment {
     private double price;
     @Column(name = "description")
     private String description;
+
+    @JsonIgnore
+    @ManyToOne(targetEntity = Doctor.class, cascade = CascadeType.ALL)
+    private @Getter @Setter Doctor doctor;
 
     public Integer getId() {
         return id;
@@ -45,26 +47,6 @@ public class Treatment {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Integer getDoctorID()
-    {
-        return doctorID;
-    }
-
-    public void setDoctorID(Integer doctorID)
-    {
-        this.doctorID=doctorID;
-    }
-
-    public String getDoctorName()
-    {
-        return doctorName;
-    }
-
-    public void setDoctorName(String doctorName)
-    {
-        this.doctorName=doctorName;
     }
 
     public Integer getDuration()
@@ -100,8 +82,6 @@ public class Treatment {
     public String toString() {
         return  "Treatment {" +
                 " title='" + title + '\'' +
-                " doctorID='" + doctorID + '\'' +
-                " doctorName='" + doctorName + '\'' +
                 " duration='" + duration + '\'' +
                 " price='" + price + '\'' +
                 ",description='" + description + '\'' +

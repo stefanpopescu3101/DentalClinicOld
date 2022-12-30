@@ -1,9 +1,9 @@
 package com.example.dentalclinic.converters;
 
-
-
 import com.example.dentalclinic.Models.Doctor;
+import com.example.dentalclinic.Models.Treatment;
 import com.example.dentalclinic.dto.DoctorDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,32 +23,29 @@ public class DoctorConverter {
         dto.setPhone(doctor.getPhone());
         dto.setEmail(doctor.getEmail());
 
+        for(Treatment treatment: doctor.getTreatments())
+        {
+            if(treatment.getDoctor().getId() == doctor.getId())
+            {
+                dto.getTreatments().add(treatment.getId());
+            }
+        }
         return dto;
-
     }
+
     public List<DoctorDTO> entityToDto(List<Doctor> doctors)
     {
         return doctors.stream().map(this::entityToDto).collect(Collectors.toList());
-
     }
+
     public Doctor dtoToEntity(DoctorDTO dto)
     {
-        Doctor entity = new Doctor();
-        entity.setId(dto.getId());
-        entity.setTitle(dto.getTitle());
-        entity.setFirstName(dto.getFirstName());
-        entity.setLastName(dto.getLastName());
-        entity.setSex(dto.getSex());
-        entity.setBirthday(dto.getBirthday());
-        entity.setPhone(dto.getPhone());
-        entity.setEmail(dto.getEmail());
+        ModelMapper mapper = new ModelMapper();
 
-        return entity;
-
+        return mapper.map(dto, Doctor.class);
     }
     public List<Doctor> dtoToEntity(List<DoctorDTO> doctorDTOS)
     {
         return doctorDTOS.stream().map(this::dtoToEntity).collect(Collectors.toList());
-
     }
 }

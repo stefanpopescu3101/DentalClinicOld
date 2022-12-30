@@ -2,8 +2,13 @@ package com.example.dentalclinic;
 
 import com.example.dentalclinic.Models.Role;
 import com.example.dentalclinic.converters.ClientConverter;
+import com.example.dentalclinic.converters.DoctorConverter;
 import com.example.dentalclinic.dto.ClientDTO;
+import com.example.dentalclinic.dto.DoctorDTO;
+import com.example.dentalclinic.dto.TreatmentDTO;
 import com.example.dentalclinic.service.ClientService;
+import com.example.dentalclinic.service.DoctorService;
+import com.example.dentalclinic.service.TreatmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,7 +36,7 @@ public class DentalClinicApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(ClientService clientService, ClientConverter converter) {
+	CommandLineRunner run(ClientService clientService, DoctorService doctorService, TreatmentService treatmentService) {
 		return args -> {
 
 			Role role1 = new Role(1, "ROLE_USER");
@@ -46,6 +51,8 @@ public class DentalClinicApplication {
 
 			clientService.addRole(client1.getUsername(), role1.getName());
 
+			DoctorDTO doctor = new DoctorDTO(1, "DR", "Maria", "Zavaranu", "female", "12/03/1990",123 , "m.zavaroanu@gmail.com", new ArrayList<>() );
+			doctorService.addDoctor(doctor);
 		};
 	}
 }

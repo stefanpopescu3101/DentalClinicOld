@@ -1,10 +1,8 @@
 package com.example.dentalclinic.converters;
 
-
-
-
 import com.example.dentalclinic.Models.Treatment;
 import com.example.dentalclinic.dto.TreatmentDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,12 +15,10 @@ public class TreatmentConverter {
         TreatmentDTO dto  = new TreatmentDTO();
         dto.setId(treatment.getId());
         dto.setTitle(treatment.getTitle());
-        dto.setDoctorID(treatment.getDoctorID());
-        dto.setDoctorName(treatment.getDoctorName());
         dto.setDuration(treatment.getDuration());
         dto.setPrice(treatment.getPrice());
         dto.setDescription(treatment.getDescription());
-
+        dto.setDoctorID(treatment.getDoctor().getId());
 
         return dto;
 
@@ -34,17 +30,9 @@ public class TreatmentConverter {
     }
     public Treatment dtoToEntity(TreatmentDTO dto)
     {
-        Treatment entity = new Treatment();
-        entity.setId(dto.getId());
-        entity.setTitle(dto.getTitle());
-        entity.setDoctorID(dto.getDoctorID());
-        entity.setDoctorName(dto.getDoctorName());
-        entity.setDuration(dto.getDuration());
-        entity.setPrice(dto.getPrice());
-        entity.setDescription(dto.getDescription());
+        ModelMapper mapper = new ModelMapper();
 
-        return entity;
-
+        return mapper.map(dto, Treatment.class);
     }
     public List<Treatment> dtoToEntity(List<TreatmentDTO> treatmentDTOS)
     {

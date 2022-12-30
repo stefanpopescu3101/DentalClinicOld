@@ -1,5 +1,4 @@
 package com.example.dentalclinic.serviceInterfaces;
-
 import com.example.dentalclinic.dto.TreatmentDTO;
 
 import java.util.List;

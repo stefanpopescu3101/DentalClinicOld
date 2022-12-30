@@ -3,6 +3,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Data
@@ -14,7 +16,8 @@ public class DoctorDTO {
     private String firstName;
     private String lastName;
     private String sex;
-    private Date birthday;
+    private String birthday;
     private Integer phone;
     private String email;
+    private Collection<Integer> treatments = new ArrayList<>();
 }

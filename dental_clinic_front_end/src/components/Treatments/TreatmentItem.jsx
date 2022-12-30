@@ -1,8 +1,22 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Card } from "react-bootstrap";
 import Grid from "@mui/material/Grid";
+import TreatmentService from "../Services/TreatmentService";
+import DoctorService from "../Services/DoctorService";
 
 function TreatmentItem(props) {
+
+    const [doctor, setDoctor] = useState("");
+
+    useEffect(() => {
+        getDoctor();
+        },[]);
+
+    function getDoctor()
+    {
+        DoctorService.getDoctorById(props.treatments.doctorID).then((response) => {setDoctor(response.data)});
+
+    }
     return (
         <>
             <Grid item key={props.treatments.title} xs={10} sm={15} md={6}>
@@ -17,10 +31,8 @@ function TreatmentItem(props) {
                             <br/>
                             Duration: {props.treatments.duration} minutes
                             <br/>
-                            Doctor Name: {props.treatments.doctorName}
-                            <br />
-                            <br />
-                            Doctor Id: {props.treatments.doctorId}
+                            <br/>
+                            Doctor : {doctor.firstName}, {doctor.lastName}
                             <br />
                             <br />
                         </Card.Text>
@@ -29,5 +41,6 @@ function TreatmentItem(props) {
             </Grid>
         </>
     );
+
 }
 export default TreatmentItem;

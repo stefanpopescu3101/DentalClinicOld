@@ -33,6 +33,7 @@ public class TreatmentDAL implements ITreatmentDAL {
         if(treatment != null)
         {
             repo.save(treatment);
+
             return true;
         }
         return  false;
@@ -43,8 +44,6 @@ public class TreatmentDAL implements ITreatmentDAL {
         Treatment updatedTreatment = this.getTreatmentById(treatment.getId());
         if(updatedTreatment != null) {
             updatedTreatment.setTitle(treatment.getTitle());
-            updatedTreatment.setDoctorID(treatment.getDoctorID());
-            updatedTreatment.setDoctorName(treatment.getDoctorName());
             updatedTreatment.setDuration(treatment.getDuration());
             updatedTreatment.setPrice(treatment.getPrice());
             updatedTreatment.setDescription(treatment.getDescription());
