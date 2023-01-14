@@ -7,11 +7,10 @@ import SignUpIcon from "@mui/icons-material/AppRegistrationOutlined";
 import SignOutIcon from "@mui/icons-material/Logout";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import HealingIcon from "@mui/icons-material/Healing";
-import FeedbackIcon from "@mui/icons-material/Feedback";
 import EngineeringIcon from "@mui/icons-material/Engineering";
 import CallReceivedIcon from "@mui/icons-material/CallReceived";
 import PeopleIcon from "@mui/icons-material/People";
-import { Icon } from "@iconify/react";
+import {AccountCircleRounded} from "@mui/icons-material";
 
 const NavBar = () => {
     return (
@@ -30,17 +29,14 @@ const NavBar = () => {
                                 <Fragment>
                                     <Dropdown>
                                         <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                                            <EngineeringIcon /> Maintaince
+                                            <EngineeringIcon /> Maintance
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item href="/schedule" id="movies">
+                                            <Dropdown.Item href="/treatments" id="movies">
                                                 <HealingIcon /> Treatments
                                             </Dropdown.Item>
                                             <Dropdown.Item href="/news" id="news">
                                                 <NewspaperIcon /> News
-                                            </Dropdown.Item>
-                                            <Dropdown.Item href="/projections" id="projections">
-                                                <Icon icon="mdi:projector" /> Projections
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
@@ -67,24 +63,12 @@ const NavBar = () => {
                                         </Nav.Link>
                                     </Nav>
                                     <Nav>
-                                        <Nav.Link href="/schedule" id="schedule">
+                                        <Nav.Link href="/treatments" id="treatments">
                                             <HealingIcon /> Treatments
-                                        </Nav.Link>
-                                    </Nav>
-                                    <Nav>
-                                        <Nav.Link href="/complaints"  id ="complaints">
-                                            {" "}
-                                            <FeedbackIcon /> Complaints
-                                        </Nav.Link>
-                                    </Nav>
-                                    <Nav>
-                                        <Nav.Link href="/chat"  id ="chat">
-                                            {" "}
                                         </Nav.Link>
                                     </Nav>
                                 </>
                             )}
-
                         {AuthService.getCurrentUser() === null && (
                             <>
                                 <Nav>
@@ -117,20 +101,21 @@ const NavBar = () => {
                             </Nav>{" "}
                         </>
                     )}
-
                     {AuthService.getCurrentUser() !== null &&
                         AuthService.getCurrentUser().roles.includes("[ROLE_USER]") && (
                             <Fragment>
                                 <Nav>
+                                    {}
                                     <Dropdown>
                                         <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                                            <AccountCircleRounded /> Profile
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item href="/profile" id="myAcoount">
+                                            <Dropdown.Item href="/profile" id="myAccount">
                                                 My Account
                                             </Dropdown.Item>
-                                            <Dropdown.Item href="/myTickets" id="myTickets">
-                                                <Icon icon="entypo:ticket" /> My Tickets
+                                            <Dropdown.Item href="/my-treatments" id="myTreatments">
+                                                <HealingIcon />  My Treatments
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>

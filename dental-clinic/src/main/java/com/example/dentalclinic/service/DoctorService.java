@@ -35,6 +35,11 @@ public class DoctorService implements IDoctorService {
     }
 
     @Override
+    public void addRole(Integer id, String roleName) {
+         data.addRole(id,roleName);
+    }
+
+    @Override
     public boolean addDoctor(DoctorDTO doctor) {
         if(doctor != null)
         {

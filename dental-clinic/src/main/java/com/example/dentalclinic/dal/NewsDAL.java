@@ -12,7 +12,7 @@ import java.util.List;
 @Repository @Transactional
 public class NewsDAL implements INewsDAL {
 
-    private INewsRepository repo;
+    private final INewsRepository repo;
     @Autowired
     public NewsDAL(INewsRepository repo)
     {

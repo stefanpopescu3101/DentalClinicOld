@@ -8,6 +8,7 @@ public interface IDoctorDAL {
     List<Doctor> getAllDoctors();
     Doctor getDoctorById(Integer id);
     boolean addDoctor(Doctor doctor);
+    void addRole(Integer id, String roleName);
     boolean editDoctor(Doctor doctor);
     boolean deleteDoctor(Integer id);
 }

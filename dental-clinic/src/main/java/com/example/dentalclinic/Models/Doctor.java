@@ -1,5 +1,6 @@
 package com.example.dentalclinic.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.Collection;
 @Table(name ="doctor")
 public class Doctor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 36)
     private Integer id;
 
@@ -43,10 +45,12 @@ public class Doctor {
     @ManyToMany(cascade= {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
     private @Getter @Setter Collection<Treatment> treatments = new ArrayList<>();
 
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    private @Getter @Setter Collection<Role> roles = new ArrayList<>();
     public Doctor() {
 
     }
-
     public Integer getId() {
         return id;
     }

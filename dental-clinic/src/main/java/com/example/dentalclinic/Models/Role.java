@@ -3,7 +3,6 @@ package com.example.dentalclinic.Models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -15,6 +14,7 @@ import javax.persistence.*;
 
 public class Role {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 36)
     private Integer id;
     private String name;

@@ -1,6 +1,7 @@
 package com.example.dentalclinic.dal;
 
 import com.example.dentalclinic.Models.Client;
+import com.example.dentalclinic.Models.Lottery;
 import com.example.dentalclinic.Models.Role;
 import com.example.dentalclinic.dalInterfaces.IClientDAL;
 import com.example.dentalclinic.repoInterfaces.IClientRepository;
@@ -58,6 +59,15 @@ public class ClientDAL implements IClientDAL, UserDetailsService
         Client client = userRepo.findByUsername(username);
         Role role = roleRepo.findByName(roleName);
         client.getRoles().add(role);
+    }
+
+    @Override
+    public boolean enterLottery(Client client, Lottery lottery) {
+        if(lottery == null || lottery.getAttendees().contains(client))
+        {return false;}
+        lottery.getAttendees().add(client);
+        client.getLotteries().add(lottery);
+        return true;
     }
 
     @Override

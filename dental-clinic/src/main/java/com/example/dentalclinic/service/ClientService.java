@@ -1,10 +1,14 @@
 package com.example.dentalclinic.service;
 
 import com.example.dentalclinic.Models.Client;
+import com.example.dentalclinic.Models.Lottery;
 import com.example.dentalclinic.Models.Role;
 import com.example.dentalclinic.converters.ClientConverter;
+import com.example.dentalclinic.converters.LotteryConverter;
 import com.example.dentalclinic.dalInterfaces.IClientDAL;
+import com.example.dentalclinic.dalInterfaces.ILotteryDAL;
 import com.example.dentalclinic.dto.ClientDTO;
+import com.example.dentalclinic.dto.LotteryDTO;
 import com.example.dentalclinic.serviceInterfaces.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +22,16 @@ public class ClientService implements IClientService {
 
     private final IClientDAL data;
     private final ClientConverter converter;
+    private final ILotteryDAL lotteryDAL;
+    private final LotteryConverter lotteryConverter;
 
     @Autowired
-    public ClientService(IClientDAL data, ClientConverter converter)
+    public ClientService(IClientDAL data, ClientConverter converter, LotteryConverter lotteryConverter, ILotteryDAL lotteryDAL)
     {
         this.data = data;
         this.converter = converter;
+        this.lotteryConverter = lotteryConverter;
+        this.lotteryDAL = lotteryDAL;
     }
     @Override
     public List<ClientDTO> getAllClients() {
@@ -46,8 +54,14 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public void addRole(String username, String roleName) {
+    public void enterLottery(ClientDTO loggedIn, Integer lotteryID) {
+        Lottery lottery = this.lotteryDAL.getLotteryById(lotteryID);
+        data.enterLottery(converter.dtoToEntity(loggedIn),lottery);
+    }
 
+    @Override
+    public void addRole(String username, String roleName) {
+        data.addRole(username,roleName);
     }
 
     @Override

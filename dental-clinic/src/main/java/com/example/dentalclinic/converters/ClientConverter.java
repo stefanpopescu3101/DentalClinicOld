@@ -20,8 +20,6 @@ public class ClientConverter {
         dto.setPassword(client.getPassword());
         dto.setFirstName(client.getFirstName());
         dto.setLastName(client.getLastName());
-        dto.setSex(client.getSex());
-        dto.setBirthday(client.getBirthday().toString());
         dto.setPhone(client.getPhone());
         dto.setEmail(client.getEmail());
         dto.setVerified(client.getVerified());
@@ -42,8 +40,6 @@ public class ClientConverter {
         entity.setPassword(dto.getPassword());
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
-        entity.setSex(dto.getSex());
-        entity.setBirthday(dto.getBirthday());
         entity.setPhone(dto.getPhone());
         entity.setEmail(dto.getEmail());
         entity.setVerified(dto.getVerified());

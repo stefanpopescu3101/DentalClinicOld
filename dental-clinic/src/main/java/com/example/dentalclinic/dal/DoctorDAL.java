@@ -1,21 +1,29 @@
 package com.example.dentalclinic.dal;
+import com.example.dentalclinic.Models.Client;
 import com.example.dentalclinic.Models.Doctor;
+import com.example.dentalclinic.Models.Role;
 import com.example.dentalclinic.dalInterfaces.IDoctorDAL;
 import com.example.dentalclinic.repoInterfaces.IDoctorRepository;
+import com.example.dentalclinic.repoInterfaces.IRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+
 @Repository @Transactional
 public class DoctorDAL implements IDoctorDAL {
 
-    private IDoctorRepository repo;
+    private final IDoctorRepository repo;
+
+    private final IRoleRepository roleRepo;
 
     @Autowired
-    public DoctorDAL(IDoctorRepository repo)
+    public DoctorDAL(IDoctorRepository repo, IRoleRepository roleRepo)
     {
         this.repo=repo;
+        this.roleRepo = roleRepo;
     }
 
     @Override
@@ -36,6 +44,13 @@ public class DoctorDAL implements IDoctorDAL {
             return true;
         }
         return  false;
+    }
+
+    @Override
+    public void addRole(Integer id, String roleName) {
+        Doctor doctor = repo.getReferenceById(id);
+        Role role = roleRepo.findByName(roleName);
+        doctor.getRoles().add(role);
     }
 
     @Override

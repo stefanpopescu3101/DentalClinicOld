@@ -1,16 +1,19 @@
 package com.example.dentalclinic.Models;
 
 import lombok.AllArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name ="news")
 public class News {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 36)
     private Integer id;
 
@@ -21,11 +24,7 @@ public class News {
     private String description;
 
     @Column(name = "postedAt")
-    private Date postedAt;
-
-    public News() {
-
-    }
+    private LocalDate postedAt;
 
     public Integer getId() {
         return id;
@@ -49,11 +48,11 @@ public class News {
         this.description = description;
     }
 
-    public Date getPostedAt() {
+    public LocalDate getPostedAt() {
         return postedAt;
     }
 
-    public void setPostedAt(Date date) {
+    public void setPostedAt(LocalDate date) {
         this.postedAt = date;
     }
 

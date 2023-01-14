@@ -32,8 +32,9 @@ function TreatmentItem(props) {
                             Duration: {props.treatments.duration} minutes
                             <br/>
                             <br/>
+                            Title: {doctor.title}
+                            <br/>
                             Doctor : {doctor.firstName}, {doctor.lastName}
-                            <br />
                             <br />
                         </Card.Text>
                     </Card.Body>

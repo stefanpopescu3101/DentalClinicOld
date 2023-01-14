@@ -5,9 +5,11 @@ import com.example.dentalclinic.converters.ClientConverter;
 import com.example.dentalclinic.converters.DoctorConverter;
 import com.example.dentalclinic.dto.ClientDTO;
 import com.example.dentalclinic.dto.DoctorDTO;
+import com.example.dentalclinic.dto.LotteryDTO;
 import com.example.dentalclinic.dto.TreatmentDTO;
 import com.example.dentalclinic.service.ClientService;
 import com.example.dentalclinic.service.DoctorService;
+import com.example.dentalclinic.service.LotteryService;
 import com.example.dentalclinic.service.TreatmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
@@ -36,7 +38,7 @@ public class DentalClinicApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(ClientService clientService, DoctorService doctorService, TreatmentService treatmentService) {
+	CommandLineRunner run(ClientService clientService, DoctorService doctorService, LotteryService lotteryService) {
 		return args -> {
 
 			Role role1 = new Role(1, "ROLE_USER");
@@ -45,7 +47,7 @@ public class DentalClinicApplication {
 			clientService.saveRole(role1);
 			clientService.saveRole(role2);
 
-			ClientDTO client1 = new ClientDTO(1, "mari", "123", "Maria", "Zavaranu", "female", "12/03/1990", 123, "m.zavaroanu@gmail.com", true);
+			ClientDTO client1 = new ClientDTO(1, "mari", "123", "Maria", "Zavaranu", "+40726535028", "m.zavaroanu@gmail.com", true, new ArrayList<>());
 
 			clientService.addClient(client1);
 
@@ -53,6 +55,13 @@ public class DentalClinicApplication {
 
 			DoctorDTO doctor = new DoctorDTO(1, "DR", "Maria", "Zavaranu", "female", "12/03/1990",123 , "m.zavaroanu@gmail.com", new ArrayList<>() );
 			doctorService.addDoctor(doctor);
+			doctorService.addRole(1,role2.getName());
+
+			LotteryDTO lottery = new LotteryDTO(1,"test",23,new ArrayList<>());
+			lotteryService.createLottery(lottery);
+
+
+
 		};
 	}
 }

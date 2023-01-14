@@ -6,12 +6,16 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.dentalclinic.Models.Client;
 import com.example.dentalclinic.Models.Role;
+import com.example.dentalclinic.converters.ClientConverter;
 import com.example.dentalclinic.dto.ClientDTO;
+import com.example.dentalclinic.dto.LotteryDTO;
 import com.example.dentalclinic.serviceInterfaces.IClientService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,11 +38,13 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class ClientController {
 
     private final IClientService service;
+    private final ClientConverter converter;
 
     @Autowired
-    public ClientController(IClientService service)
+    public ClientController(IClientService service, ClientConverter converter)
     {
         this.service=service;
+        this.converter = converter;
     }
 
     @GetMapping
@@ -53,6 +59,19 @@ public class ClientController {
         else
         {
             return ResponseEntity.notFound().build();
+        }
+
+    }
+
+    @PostMapping("/enterLottery/{id}")
+    public ResponseEntity<LotteryDTO> enterLottery(@PathVariable(value = "id")  Integer id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Client loggedInUser = this.service.getClient(authentication.getName());
+        if (id == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            service.enterLottery(converter.entityToDto(loggedInUser),id);
+            return ResponseEntity.ok().build();
         }
 
     }
@@ -76,6 +95,7 @@ public class ClientController {
         } else {
             service.addClient(user);
             service.addRole(user.getUsername(),"ROLE_USER");
+            user.setVerified(true);
             return ResponseEntity.ok().body(user);
         }
     }

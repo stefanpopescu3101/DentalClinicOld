@@ -16,6 +16,7 @@ import java.util.Date;
 @Table(name ="customer")
 public class Client {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 36)
     private Integer id;
 
@@ -31,17 +32,8 @@ public class Client {
     @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "sex")
-    private String sex;
-
-    @Column(name = "birthday")
-    private String birthday;
-
-    @Column(name = "cnp")
-    private Integer cnp;
-
     @Column(name = "phone")
-    private Integer phone;
+    private String phone;
 
     @Column(name = "email")
     private String email;
@@ -53,9 +45,13 @@ public class Client {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(cascade= {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
+    private Collection<Lottery> lotteries = new ArrayList<>();
+
     public Client(){
 
-    };
+    }
 
     public Integer getId() {
         return id;
@@ -81,35 +77,11 @@ public class Client {
         this.lastName = lastName;
     }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public Integer getCNP() {
-        return cnp;
-    }
-
-    public void setCNP(Integer cnp) {
-        this.cnp = cnp;
-    }
-
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -149,18 +121,23 @@ public class Client {
         return roles;
     }
 
+    public Collection<Lottery> getLotteries() {
+        return lotteries;
+    }
+
+    public void setLotteries(Collection<Lottery> lotteries) {
+        this.lotteries = lotteries;
+    }
+
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
 
-    public Client(Integer id, String firstName, String lastName, String sex, String birthday, Integer cnp, Integer phone, String email, boolean verified)
+    public Client(Integer id, String firstName, String lastName, String phone, String email, boolean verified)
     {
         this.id=id;
         this.firstName=firstName;
         this.lastName=lastName;
-        this.sex=sex;
-        this.birthday=birthday;
-        this.cnp=cnp;
         this.phone=phone;
         this.email=email;
         this.verified=verified;
@@ -170,9 +147,6 @@ public class Client {
     public String toString() {
         return  "Customer {" +
                 ",fullName='" + firstName + lastName + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", cnp='" + cnp + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 '}';
