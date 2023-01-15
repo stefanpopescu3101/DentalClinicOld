@@ -26,11 +26,7 @@ function TreatmentPage() {
 
             {AuthService.getCurrentUser() === null && (
                 <>
-                    <Slider />
-                    <br />
                     <div className="container">
-                        <h1>News</h1>
-                        <br />
                         <TreatmentList treatments={treatments} />
                     </div>
                 </>

@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - docker
 
 build:
   stage: build
@@ -16,7 +17,17 @@ test:
     -  ./gradlew test 
     -  ./gradlew.bat --stop
 
-
-
+docker: 
+    stage: docker
+    script: 
+    - cd dental_clinic_front_end
+    - docker build -t frontend .
+    - cd ..
+    - cd dental-clinic
+    - replace "C:\Users\tepap\Desktop\dentalclinic\dental-clinic\override\prod\application.properties" "C:\Users\tepap\Desktop\dentalclinic\dental-clinic\src\main\resources"
+    - ./gradlew build -x test
+    - docker build -t backend .
+    - replace "C:\Users\tepap\Desktop\dentalclinic\dental-clinic\override\test\application.properties" "C:\Users\tepap\Desktop\dentalclinic\dental-clinic\src\main\resources"
+    - ./gradlew.bat --stop
 
     
