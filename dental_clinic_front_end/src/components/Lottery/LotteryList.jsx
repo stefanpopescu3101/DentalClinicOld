@@ -8,8 +8,8 @@ function LotteryList(props) {
         <>
             <Container sx={{ py: 1 }} maxWidth="md">
                 <Grid container spacing={5}>
-                    {props.treatments.map((treatment) => (
-                        <LotteryItem key={treatment.id} treatments = {treatment}></LotteryItem>
+                    {props.lotteries.map((lottery) => (
+                        <LotteryItem key={lottery.name} lotteries = {lottery}></LotteryItem>
                     ))}
                 </Grid>
             </Container>

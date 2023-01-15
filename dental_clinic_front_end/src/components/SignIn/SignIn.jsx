@@ -1,9 +1,11 @@
 import React, {useRef, useState} from "react";
 import { Button, Form } from "react-bootstrap";
 import AuthService from "../Services/AuthService";
+import {useHistory} from "react-router-dom";
 
 const Login = () => {
   const [msg, setMsg] = useState(null);
+  const history = useHistory();
   const username = useRef();
   const password = useRef();
 
@@ -14,7 +16,7 @@ const Login = () => {
         .then((response) => response.json())
         .then((responseData) => {
           localStorage.setItem("user", JSON.stringify(responseData));
-          History.push("/news");
+          history.push("/");
           window.location.reload();
         })
         .catch(err=>{setMsg("Something went wrong! Please try again!");

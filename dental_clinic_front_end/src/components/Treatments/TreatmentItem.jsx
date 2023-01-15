@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import { Card } from "react-bootstrap";
+import {Button, Card} from "react-bootstrap";
 import Grid from "@mui/material/Grid";
-import TreatmentService from "../Services/TreatmentService";
 import DoctorService from "../Services/DoctorService";
+import ClientService from "../Services/ClientService";
 
 function TreatmentItem(props) {
 
@@ -15,8 +15,8 @@ function TreatmentItem(props) {
     function getDoctor()
     {
         DoctorService.getDoctorById(props.treatments.doctorID).then((response) => {setDoctor(response.data)});
-
     }
+
     return (
         <>
             <Grid item key={props.treatments.title} xs={10} sm={15} md={6}>
@@ -36,6 +36,14 @@ function TreatmentItem(props) {
                             <br/>
                             Doctor : {doctor.firstName}, {doctor.lastName}
                             <br />
+                            {/*<Button*/}
+                            {/*    variant="primary"*/}
+                            {/*    onClick={() => {*/}
+                            {/*        handleClick(props.lotteries.id);*/}
+                            {/*    }}*/}
+                            {/*>*/}
+                            {/*    Enter*/}
+                            {/*</Button>*/}
                         </Card.Text>
                     </Card.Body>
                 </Card>

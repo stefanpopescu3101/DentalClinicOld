@@ -14,5 +14,5 @@ public class NewsDTO {
     private Integer id;
     private String title;
     private String description;
-    private LocalDate postedAt;
+    private String postedAt;
 }

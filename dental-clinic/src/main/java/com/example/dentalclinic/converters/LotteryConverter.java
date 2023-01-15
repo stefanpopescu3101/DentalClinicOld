@@ -21,6 +21,7 @@ public class LotteryConverter {
         dto.setCapacity(lottery.getCapacity());
         dto.setName(lottery.getName());
         dto.setDescription(lottery.getDescription());
+        dto.setNrOfClients(lottery.getNrOfClients());
         for (Client client: lottery.getAttendees())
         {
             dto.getClients().add(client.getId().intValue());

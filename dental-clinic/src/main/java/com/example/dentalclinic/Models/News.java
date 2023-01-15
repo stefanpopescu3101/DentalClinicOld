@@ -24,7 +24,7 @@ public class News {
     private String description;
 
     @Column(name = "postedAt")
-    private LocalDate postedAt;
+    private String postedAt;
 
     public Integer getId() {
         return id;
@@ -48,11 +48,11 @@ public class News {
         this.description = description;
     }
 
-    public LocalDate getPostedAt() {
+    public String getPostedAt() {
         return postedAt;
     }
 
-    public void setPostedAt(LocalDate date) {
+    public void setPostedAt(String date) {
         this.postedAt = date;
     }
 

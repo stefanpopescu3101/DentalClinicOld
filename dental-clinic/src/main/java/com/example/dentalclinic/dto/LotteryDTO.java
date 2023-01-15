@@ -16,5 +16,6 @@ public class LotteryDTO {
     private String name;
     private String description;
     private Integer capacity;
+    private Integer nrOfClients;
     private Collection<Integer> clients = new ArrayList<>();
 }

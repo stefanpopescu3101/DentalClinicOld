@@ -68,6 +68,7 @@ public class ClientDAL implements IClientDAL, UserDetailsService
             return false;
         }
         lottery.getAttendees().add(client);
+        lottery.setNrOfClients(+1) ;
         client.getLotteries().add(lottery);
         return true;
 

@@ -1,5 +1,6 @@
 package com.example.dentalclinic.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,10 @@ public class Lottery {
 
     @Column(name = "description")
     private @Getter @Setter String description;
+
+    @Column(name = "nrOfClients")
+    private @Getter @Setter Integer nrOfClients;
+    @JsonIgnore
     @OneToMany(targetEntity=Client.class, cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
     private @Getter @Setter Collection<Client> attendees = new ArrayList<>();
 

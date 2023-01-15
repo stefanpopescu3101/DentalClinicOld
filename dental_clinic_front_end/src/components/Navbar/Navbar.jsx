@@ -29,26 +29,27 @@ const NavBar = () => {
                                 <Fragment>
                                     <Dropdown>
                                         <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                                            <EngineeringIcon /> Maintance
+                                            <EngineeringIcon /> Maintenance
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
+                                            <Dropdown.Item href="/news" id="news">
+                                                <NewspaperIcon /> News
+                                            </Dropdown.Item>
                                             <Dropdown.Item href="/treatments" id="movies">
                                                 <HealingIcon /> Treatments
                                             </Dropdown.Item>
-                                            <Dropdown.Item href="/news" id="news">
-                                                <NewspaperIcon /> News
+                                            <Dropdown.Item href="/lotteries" id="movies">
+                                                <HealingIcon /> Lotteries
+                                            </Dropdown.Item>
+                                            <Dropdown.Item href="/doctors" id="movies">
+                                                <HealingIcon /> Doctors
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                     <Nav>
-                                        <Nav.Link href="/received-complaints"  id ="receivedComplaints">
-                                            <CallReceivedIcon /> Received Complaints
-                                        </Nav.Link>
-                                    </Nav>
-                                    <Nav>
-                                        <Nav.Link href="/users"  id ="users">
+                                        <Nav.Link href="/clients"  id ="users">
                                             <PeopleIcon />
-                                            Users
+                                            Clients
                                         </Nav.Link>
                                     </Nav>
                                 </Fragment>
@@ -65,6 +66,11 @@ const NavBar = () => {
                                     <Nav>
                                         <Nav.Link href="/treatments" id="treatments">
                                             <HealingIcon /> Treatments
+                                        </Nav.Link>
+                                    </Nav>
+                                    <Nav>
+                                        <Nav.Link href="/lotteries" id="lotteries">
+                                            <HealingIcon /> Lotteries
                                         </Nav.Link>
                                     </Nav>
                                 </>
@@ -129,15 +135,6 @@ const NavBar = () => {
                         AuthService.getCurrentUser().roles.includes("[ROLE_ADMIN]") && (
                             <Fragment>
                                 <Nav>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item href="/profile" id="profile">
-                                                My Account
-                                            </Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
                                     <Nav.Link href="/sign-out" id="signOut">
                                         Sign Out <SignOutIcon />
                                     </Nav.Link>

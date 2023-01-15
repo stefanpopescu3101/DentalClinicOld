@@ -19,7 +19,6 @@ class DoctorService {
             headers: authHeader()
         });
     }
-
     async deleteDoctor(id) {
         return await axios.delete(DOCTOR_API_BASE_URL + "/" + id, {
             headers: authHeader(),

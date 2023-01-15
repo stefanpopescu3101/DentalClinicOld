@@ -1,23 +1,45 @@
 import {  useState, useEffect } from "react";
 import React from "react";
 import AuthService from "../Services/AuthService";
-import TreatmentService from "../Services/TreatmentService";
+import LotteryService from "../Services/LotteryService";
 import LotteryList from "./LotteryList";
+import NewsTable from "../News/NewsTable";
+import Slider from "../Slider/Slider";
+import NewsList from "../News/NewsList";
+import LotteryTable from "./LotteryTable";
 
 function LotteryPage() {
-    const [treatments, setTreatments] = useState([]);
+    const [lotteries, setLotteries] = useState([]);
 
     useEffect(() => {
-        TreatmentService.getTreatments().then((response) => {
-            setTreatments(response.data);
+        LotteryService.getLotteries().then((response) => {
+            setLotteries(response.data);
         });
     }, []);
 
     return (
         <div>
+            {AuthService.getCurrentUser() !== null &&
+                AuthService.getCurrentUser().roles.includes("[ROLE_ADMIN]") && (
+                    <>
+                        <div className="container">
+                            <LotteryTable></LotteryTable>
+                        </div>
+                    </>
+                )}
+
             {AuthService.getCurrentUser() === null && (
-                <LotteryList treatments={treatments}></LotteryList>
+                <>
+                    <LotteryList lotteries={lotteries} />
+                </>
             )}
+
+            {AuthService.getCurrentUser() !== null &&
+                AuthService.getCurrentUser().roles.includes("[ROLE_USER]") && (
+                    <>
+                        <LotteryList lotteries={lotteries} />
+                    </>
+                )}
         </div>
     );
 }

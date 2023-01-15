@@ -31,9 +31,9 @@ public class NewsServiceMockTest {
     public void setUp()
     {
         List<News> news = List.of(
-                new News(1,"test1","test",LocalDate.now()),
-                new News(2,"test2","test",LocalDate.now()),
-                new News(3,"test3","test",LocalDate.now())
+                new News(1,"test1","test","10/01/2023"),
+                new News(2,"test2","test","10/01/2023"),
+                new News(3,"test3","test","10/01/2023")
 
         );
 
@@ -63,7 +63,7 @@ public class NewsServiceMockTest {
     {
         //arrange
         NewsService service = new NewsService(newsDAL,new NewsConverter());
-        News news =  new News(4,"test3","test",LocalDate.now());
+        News news =  new News(4,"test3","test","10/01/2023");
 
         //act
         when(newsDAL.getNewsById(4)).thenReturn(news);
@@ -95,7 +95,7 @@ public class NewsServiceMockTest {
         NewsService service = new NewsService(newsDAL,new NewsConverter());
 
         //act
-        NewsDTO news =  new NewsDTO(4,"test3","test", LocalDate.now());
+        NewsDTO news =  new NewsDTO(4,"test3","test", "10/01/2023");
         service.addNews(news);
 
         //assert
@@ -111,7 +111,7 @@ public class NewsServiceMockTest {
         NewsService service = new NewsService(newsDAL, new NewsConverter());
 
         //act
-        NewsDTO news = new NewsDTO(4, "test3", "test", LocalDate.now());
+        NewsDTO news = new NewsDTO(4, "test3", "test", "10/01/2023");
         service.addNews(news);
 
         news.setTitle("Test");

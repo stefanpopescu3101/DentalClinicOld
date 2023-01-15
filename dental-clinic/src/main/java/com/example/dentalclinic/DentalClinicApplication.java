@@ -48,16 +48,19 @@ public class DentalClinicApplication {
 			clientService.saveRole(role2);
 
 			ClientDTO client1 = new ClientDTO(1, "mari", "123", "Maria", "Zavaranu", "+40726535028", "m.zavaroanu@gmail.com", true, new ArrayList<>());
+			ClientDTO client2 = new ClientDTO(2, "oanceaaa", "123", "Maria", "Oancea", "+40726535028", "m.zavaroanu@gmail.com", true, new ArrayList<>());
 
 			clientService.addClient(client1);
+			clientService.addClient(client2);
 
 			clientService.addRole(client1.getUsername(), role1.getName());
+			clientService.addRole(client2.getUsername(), role2.getName());
 
 			DoctorDTO doctor = new DoctorDTO(1, "DR", "Maria", "Zavaranu", "female", "12/03/1990",123 , "m.zavaroanu@gmail.com", new ArrayList<>() );
 			doctorService.addDoctor(doctor);
 			doctorService.addRole(1,role2.getName());
 
-			LotteryDTO lottery = new LotteryDTO(1,"test","test",23,new ArrayList<>());
+			LotteryDTO lottery = new LotteryDTO(1,"test","test",23,0,new ArrayList<>());
 			lotteryService.createLottery(lottery);
 
 
