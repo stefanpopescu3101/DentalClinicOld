@@ -8,7 +8,6 @@ import SignOutIcon from "@mui/icons-material/Logout";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import HealingIcon from "@mui/icons-material/Healing";
 import EngineeringIcon from "@mui/icons-material/Engineering";
-import CallReceivedIcon from "@mui/icons-material/CallReceived";
 import PeopleIcon from "@mui/icons-material/People";
 import {AccountCircleRounded} from "@mui/icons-material";
 

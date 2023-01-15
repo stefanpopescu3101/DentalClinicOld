@@ -10,6 +10,7 @@ import SignUp from "./pages/signUp";
 import SignOut from "./pages/signOut";
 import Lottery from "./pages/lotteries";
 import NotFound from "./pages/pageNotFound";
+import Doctor from "./pages/doctor";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path ="/news" exact component={News} />
                 <Route path ="/treatments" exact component={Treatments} />
                 <Route path ="/lotteries" exact component={Lottery} />
+                <Route path ="/doctors" exact component={Doctor}/>
                 <Route path ="/sign-in" exact component={SignIn} />
                 <Route path ="/sign-up" exact component={SignUp} />
                 <Route path ="/sign-out" exact component={SignOut} />

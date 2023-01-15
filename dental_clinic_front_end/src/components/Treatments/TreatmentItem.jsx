@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {Button, Card} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import Grid from "@mui/material/Grid";
 import DoctorService from "../Services/DoctorService";
-import ClientService from "../Services/ClientService";
 
 function TreatmentItem(props) {
 

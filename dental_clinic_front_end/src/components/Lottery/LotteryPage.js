@@ -3,9 +3,6 @@ import React from "react";
 import AuthService from "../Services/AuthService";
 import LotteryService from "../Services/LotteryService";
 import LotteryList from "./LotteryList";
-import NewsTable from "../News/NewsTable";
-import Slider from "../Slider/Slider";
-import NewsList from "../News/NewsList";
 import LotteryTable from "./LotteryTable";
 
 function LotteryPage() {
