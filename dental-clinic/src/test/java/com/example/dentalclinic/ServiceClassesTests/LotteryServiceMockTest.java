@@ -111,12 +111,12 @@ public class LotteryServiceMockTest {
         LotteryService service = new LotteryService(lotteryDAL, new LotteryConverter(), new ClientConverter());
 
         //act
-        List<String> clients = List.of(
-                "1",
-                "2",
-                "3"
+        List<Integer> clients = List.of(
+                1,
+                2,
+                3
         );
-        LotteryDTO lotteryDTO =  new LotteryDTO(4,"test3",20, clients);
+        LotteryDTO lotteryDTO =  new LotteryDTO(4,"test3","test3",20, clients);
         service.createLottery(lotteryDTO);
 
         //assert
@@ -132,12 +132,12 @@ public class LotteryServiceMockTest {
         LotteryService service = new LotteryService(lotteryDAL, new LotteryConverter(), new ClientConverter());
 
         //act
-        List<String> clients = List.of(
-                "1",
-                "2",
-                "3"
+        List<Integer> clients = List.of(
+                1,
+                2,
+                3
         );
-        LotteryDTO lotteryDTO =  new LotteryDTO(4,"test3",20, clients);
+        LotteryDTO lotteryDTO =  new LotteryDTO(4,"test3","test3",20, clients);
         service.createLottery(lotteryDTO);
 
         lotteryDTO.setName("Test");

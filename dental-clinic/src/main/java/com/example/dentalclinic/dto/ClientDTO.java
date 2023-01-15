@@ -3,6 +3,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -18,7 +19,7 @@ public class ClientDTO {
     private String phone;
     private String email;
     private Boolean verified;
-    private Collection<Integer> lotteries;
+    private Collection<Integer> lotteries  = new ArrayList<>();
 
 
 

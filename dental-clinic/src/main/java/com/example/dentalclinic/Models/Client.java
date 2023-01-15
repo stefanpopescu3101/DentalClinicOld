@@ -18,119 +18,39 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 36)
-    private Integer id;
+    private @Getter @Setter Integer id;
 
     @Column(name = "username")
-    private String username;
+    private @Getter @Setter String username;
 
     @Column(name="password")
-    private String password;
+    private @Getter @Setter String password;
 
     @Column(name = "firstName")
-    private String firstName;
+    private @Getter @Setter String firstName;
 
     @Column(name = "lastName")
-    private String lastName;
+    private @Getter @Setter String lastName;
 
     @Column(name = "phone")
-    private String phone;
+    private @Getter @Setter String phone;
 
     @Column(name = "email")
-    private String email;
+    private @Getter @Setter String email;
 
     @Column(name = "verified")
-    private Boolean verified;
+    private @Getter @Setter Boolean verified;
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+    private @Getter @Setter Collection<Role> roles = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(cascade= {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
-    private Collection<Lottery> lotteries = new ArrayList<>();
+    @OneToMany(targetEntity=Lottery.class, cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
+    private @Getter @Setter Collection<Lottery> lotteries = new ArrayList<>();
 
     public Client(){
 
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer ID) {
-        this.id = ID;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Boolean getVerified() {
-        return verified;
-    }
-
-    public void setVerified(Boolean verified) {
-        this.verified = verified;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public Collection<Lottery> getLotteries() {
-        return lotteries;
-    }
-
-    public void setLotteries(Collection<Lottery> lotteries) {
-        this.lotteries = lotteries;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
     }
 
     public Client(Integer id, String firstName, String lastName, String phone, String email, boolean verified)
@@ -143,12 +63,4 @@ public class Client {
         this.verified=verified;
     }
 
-    @Override
-    public String toString() {
-        return  "Customer {" +
-                ",fullName='" + firstName + lastName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }

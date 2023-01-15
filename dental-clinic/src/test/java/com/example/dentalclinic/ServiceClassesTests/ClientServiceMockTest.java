@@ -34,9 +34,13 @@ public class ClientServiceMockTest {
     @Mock
     private ILotteryDAL lotteryDAL;
 
+    private ClientConverter clientConverter = new ClientConverter();
+    private ClientService service;
+
     @BeforeEach
     public void setUp()
     {
+        service = new ClientService(clientDAL,new ClientConverter(), new LotteryConverter(),lotteryDAL);
         List<Client> clients = List.of(
                 new Client(1,"test1","test", "075555555", "test@test.com", false),
                 new Client(2,"test2","test", "075555555", "test@test.com", false),
@@ -63,9 +67,6 @@ public class ClientServiceMockTest {
     @Test
     public void getAllClientsTest_ReturnList()
     {
-        //arrange
-        ClientService service = new ClientService(clientDAL,new ClientConverter(), new LotteryConverter(),lotteryDAL);
-
         //act
         List<ClientDTO> clients = service.getAllClients();
 
@@ -78,22 +79,19 @@ public class ClientServiceMockTest {
     @Test
     public void getClientById()
     {
-        //arrange
-        ClientService service = new ClientService(clientDAL,new ClientConverter(), new LotteryConverter(),lotteryDAL);
         Client client =  new Client(4,"test4","test", "075555555", "test@test.com", false);
 
         //act
         when(clientDAL.getClientById(4)).thenReturn(client);
-        ClientDTO postToBeCheck =service.getClientById(4);
+        ClientDTO clientDTO = service.getClientById(4);
 
         //assert
-        Assertions.assertEquals("test4", postToBeCheck.getFirstName());
+        Assertions.assertEquals("test4", clientDTO.getFirstName());
     }
 
     @Test
     public void deleteClient()
     {
-
         //arrange
         ClientService service = new ClientService(clientDAL,new ClientConverter(), new LotteryConverter(),lotteryDAL);
 
@@ -108,9 +106,6 @@ public class ClientServiceMockTest {
     @Test
     public void addClient()
     {
-        //arrange
-        ClientService service = new ClientService(clientDAL,new ClientConverter(), new LotteryConverter(),lotteryDAL);
-
         //act
         List<Integer> lotteries = List.of(
                 1,
@@ -121,17 +116,14 @@ public class ClientServiceMockTest {
         service.addClient(clientDTO);
 
         //assert
-        ArgumentCaptor<Client> newsArgumentCaptor = ArgumentCaptor.forClass(Client.class);
-        verify(clientDAL).addClient(newsArgumentCaptor.capture());
-        Client capturePost = newsArgumentCaptor.getValue();
+        ArgumentCaptor<Client> clientArgumentCaptor = ArgumentCaptor.forClass(Client.class);
+        verify(clientDAL).addClient(clientArgumentCaptor.capture());
+        Client capturePost = clientArgumentCaptor.getValue();
         Assertions.assertEquals(clientDTO.getFirstName(), capturePost.getFirstName());
     }
 
     @Test
     public void updateClient() {
-        //arrange
-        ClientService service = new ClientService(clientDAL,new ClientConverter(), new LotteryConverter(),lotteryDAL);
-
         //act
         List<Integer> lotteries = List.of(
                 1,
@@ -145,27 +137,26 @@ public class ClientServiceMockTest {
         service.editClient(clientDTO);
 
         //assert
-        ArgumentCaptor<Client> newsArgumentCaptor = ArgumentCaptor.forClass(Client.class);
-        verify(clientDAL).editClient(newsArgumentCaptor.capture());
-        Client capturePost = newsArgumentCaptor.getValue();
+        ArgumentCaptor<Client> clientArgumentCaptor = ArgumentCaptor.forClass(Client.class);
+        verify(clientDAL).editClient(clientArgumentCaptor.capture());
+        Client capturePost = clientArgumentCaptor.getValue();
         Assertions.assertEquals(clientDTO.getFirstName(), capturePost.getFirstName());
     }
 
     @Test
     public void enterLottery() {
         //arrange
-        ClientService service = new ClientService(clientDAL,new ClientConverter(), new LotteryConverter(),lotteryDAL);
+
+        Client client = clientDAL.getClientById(1);
 
         //act
-        ClientDTO clientDTO =  new ClientDTO(4, "username", "password","test4","test", "075555555", "test@test.com", false, new ArrayList<>());
-        service.addClient(clientDTO);
-        service.enterLottery(clientDTO,1);
+        service.enterLottery(clientConverter.entityToDto(client),1);
 
         //assert
-        ArgumentCaptor<Client> newsArgumentCaptor = ArgumentCaptor.forClass(Client.class);
+        ArgumentCaptor<Client> clientArgumentCaptor = ArgumentCaptor.forClass(Client.class);
         ArgumentCaptor<Lottery> lotteryArgumentCaptor = ArgumentCaptor.forClass(Lottery.class);
-        verify(clientDAL).enterLottery(newsArgumentCaptor.capture(),lotteryArgumentCaptor.capture());
-        Client capturePost = newsArgumentCaptor.getValue();
-        Assertions.assertEquals(clientDTO.getFirstName(), capturePost.getFirstName());
+        verify(clientDAL).enterLottery(clientArgumentCaptor.capture(),lotteryArgumentCaptor.capture());
+        var capturePost = lotteryArgumentCaptor.getValue();
+        Assertions.assertEquals(1, capturePost.getId());
     }
 }

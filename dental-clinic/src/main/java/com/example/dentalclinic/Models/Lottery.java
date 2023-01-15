@@ -8,12 +8,13 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name ="lottery")
 public class Lottery {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(length = 36)
     private @Getter @Setter Integer id;
     @Column(name = "name")
@@ -23,10 +24,10 @@ public class Lottery {
 
     @Column(name = "description")
     private @Getter @Setter String description;
-    @OneToMany(cascade= {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
+    @OneToMany(targetEntity=Client.class, cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
     private @Getter @Setter Collection<Client> attendees = new ArrayList<>();
 
-    public Lottery(Integer id, String name, Integer capacity, Collection<Client> attendees) {
+    public Lottery(Integer id, String name, Integer capacity, List<Client> attendees) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;

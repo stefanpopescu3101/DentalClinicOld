@@ -1,6 +1,8 @@
 package com.example.dentalclinic.converters;
 
+import com.example.dentalclinic.Models.Client;
 import com.example.dentalclinic.Models.Lottery;
+import com.example.dentalclinic.dto.ClientDTO;
 import com.example.dentalclinic.dto.LotteryDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -10,11 +12,20 @@ import java.util.stream.Collectors;
 
 @Component
 public class LotteryConverter {
+
+    private final ClientConverter clientConverter = new ClientConverter();
     public LotteryDTO entityToDto(Lottery lottery)
     {
-        ModelMapper mapper = new ModelMapper();
-
-        return mapper.map(lottery, LotteryDTO.class);
+        LotteryDTO dto  = new LotteryDTO();
+        dto.setId(lottery.getId());
+        dto.setCapacity(lottery.getCapacity());
+        dto.setName(lottery.getName());
+        dto.setDescription(lottery.getDescription());
+        for (Client client: lottery.getAttendees())
+        {
+            dto.getClients().add(client.getId().intValue());
+        }
+        return dto;
 
     }
     public List<LotteryDTO> entityToDto(List<Lottery> lotteries)

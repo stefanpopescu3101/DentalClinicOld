@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 public class LotteryDTO {
     private Integer id;
     private String name;
+    private String description;
     private Integer capacity;
-    private Collection<String> attendees;
+    private Collection<Integer> clients = new ArrayList<>();
 }

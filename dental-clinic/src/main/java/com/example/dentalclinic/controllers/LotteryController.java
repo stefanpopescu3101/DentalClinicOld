@@ -25,7 +25,7 @@ public class LotteryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<LotteryDTO>> getAllDoctors()
+    public ResponseEntity<List<LotteryDTO>> getAllLotteries()
     {
         List<LotteryDTO> lotteryList = service.getAllLotteries();
 

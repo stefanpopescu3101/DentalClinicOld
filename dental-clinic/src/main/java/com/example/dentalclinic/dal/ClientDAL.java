@@ -63,11 +63,14 @@ public class ClientDAL implements IClientDAL, UserDetailsService
 
     @Override
     public boolean enterLottery(Client client, Lottery lottery) {
-        if(lottery == null || lottery.getAttendees().contains(client))
-        {return false;}
+        if(lottery.getAttendees().contains(client))
+        {
+            return false;
+        }
         lottery.getAttendees().add(client);
         client.getLotteries().add(lottery);
         return true;
+
     }
 
     @Override

@@ -57,7 +57,7 @@ public class DentalClinicApplication {
 			doctorService.addDoctor(doctor);
 			doctorService.addRole(1,role2.getName());
 
-			LotteryDTO lottery = new LotteryDTO(1,"test",23,new ArrayList<>());
+			LotteryDTO lottery = new LotteryDTO(1,"test","test",23,new ArrayList<>());
 			lotteryService.createLottery(lottery);
 
 
