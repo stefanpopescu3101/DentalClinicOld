@@ -116,7 +116,7 @@ public class LotteryServiceMockTest {
                 2,
                 3
         );
-        LotteryDTO lotteryDTO =  new LotteryDTO(4,"test3","test3",20, clients);
+        LotteryDTO lotteryDTO =  new LotteryDTO(4,"test3","test3",20,0, clients);
         service.createLottery(lotteryDTO);
 
         //assert
@@ -137,7 +137,7 @@ public class LotteryServiceMockTest {
                 2,
                 3
         );
-        LotteryDTO lotteryDTO =  new LotteryDTO(4,"test3","test3",20, clients);
+        LotteryDTO lotteryDTO =  new LotteryDTO(4,"test3","test3",20,0, clients);
         service.createLottery(lotteryDTO);
 
         lotteryDTO.setName("Test");
