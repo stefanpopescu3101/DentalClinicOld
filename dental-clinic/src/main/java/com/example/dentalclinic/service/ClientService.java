@@ -54,9 +54,9 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public void enterLottery(ClientDTO loggedIn, Integer lotteryID) {
+    public void enterLottery(Client loggedIn, Integer lotteryID) {
         Lottery lottery = this.lotteryDAL.getLotteryById(lotteryID);
-        Client client = this.getClient(loggedIn.getUsername());
+        Client client = this.data.getUser(loggedIn.getUsername());
         data.enterLottery(client,lottery);
     }
 

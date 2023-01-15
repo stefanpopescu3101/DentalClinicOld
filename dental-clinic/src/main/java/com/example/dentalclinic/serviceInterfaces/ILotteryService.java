@@ -12,7 +12,7 @@ public interface ILotteryService {
     boolean createLottery(LotteryDTO lottery);
 
     List<ClientDTO> viewAttendees(Integer id);
-
+    List<LotteryDTO> getLotteriesByUsername (String username);
     boolean editLottery(LotteryDTO lottery);
     boolean deleteLottery(Integer id);
     ClientDTO chooseWinner(List<ClientDTO> clients);

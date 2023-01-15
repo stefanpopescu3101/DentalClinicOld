@@ -1,4 +1,4 @@
-import {  useRef, useState, useEffect } from "react";
+import {  useRef } from "react";
 import React from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
@@ -32,12 +32,13 @@ const PostDoctor = () => {
             firstName: doctorFirstNameRef,
             lastName: doctorLastNameRef,
             sex: doctorSexRef,
-            birthdday: doctorBirthdayRef,
+            birthday: doctorBirthdayRef,
             phone: doctorPhoneRef,
             email: doctorEmailRef,
 
         };
         DoctorService.addDoctor(doctor);
+        window.location.reload();
     };
 
     return (
@@ -61,7 +62,7 @@ const PostDoctor = () => {
                         type="text"
                         ref={doctorFirstName}
                         id="title"
-                        placeholder="Write doctor's title (e.g. Orthodontist etc.)..."
+                        placeholder="Write doctor's first name..."
                         required
                     />
                 </Form.Group>
@@ -72,7 +73,7 @@ const PostDoctor = () => {
                         type="text"
                         ref={doctorLastName}
                         id="doctorId"
-                        placeholder="Select the ..."
+                        placeholder="Write doctor's last name..."
                         required
                     />
                 </Form.Group>
@@ -83,7 +84,7 @@ const PostDoctor = () => {
                         type="text"
                         ref={doctorSex}
                         id="doctorId"
-                        placeholder="Select the ..."
+                        placeholder="Write doctor's gender..."
                         required
                     />
                 </Form.Group>
@@ -94,7 +95,7 @@ const PostDoctor = () => {
                         type="text"
                         ref={doctorBirthday}
                         id="doctorId"
-                        placeholder="Select the ..."
+                        placeholder="Write doctor's birthday..."
                         required
                     />
                 </Form.Group>
@@ -105,7 +106,7 @@ const PostDoctor = () => {
                         type="number"
                         ref={doctorPhone}
                         id="price"
-                        placeholder="Write the price of the treatment..."
+                        placeholder="Write doctor's phone......"
                         min="0"
                         required
                     />
@@ -117,7 +118,7 @@ const PostDoctor = () => {
                         type="text"
                         id="description"
                         ref={doctorEmail}
-                        placeholder="Write the duration of the treatment..."
+                        placeholder="Write doctor's email......"
                         required
                     />
                 </Form.Group>

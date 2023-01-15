@@ -150,7 +150,7 @@ public class ClientServiceMockTest {
         Client client = clientDAL.getClientById(1);
 
         //act
-        service.enterLottery(clientConverter.entityToDto(client),1);
+        service.enterLottery(client,1);
 
         //assert
         ArgumentCaptor<Client> clientArgumentCaptor = ArgumentCaptor.forClass(Client.class);

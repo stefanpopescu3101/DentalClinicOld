@@ -28,6 +28,7 @@ const PostLottery = () => {
         console.log(lottery);
 
         LotteryService.createLottery(lottery);
+        window.location.reload();
     };
 
     return (

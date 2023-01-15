@@ -2,13 +2,13 @@ import React from "react";
 import {Button, Card} from "react-bootstrap";
 import Grid from "@mui/material/Grid";
 import ClientService from "../Services/ClientService";
+import AuthService from "../Services/AuthService";
 
 function LotteryItem(props) {
-
+    const user = AuthService.getCurrentUser();
     const handleClick = (lotteryId) => {
-        ClientService.enterLottery(lotteryId);
+        ClientService.enterLottery(lotteryId,user.user);
     }
-
         return (
 
             <>

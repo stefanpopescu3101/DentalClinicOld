@@ -1,7 +1,7 @@
 import React from "react";
-import DoctorPage from "../components/Doctor/DoctorPage";
+import ClientLotteries from "../components/Client/ClientLotteries";
 
-const Doctor = () => {
+const ClientLotteriesPage = () => {
     return (
         <>
             <div
@@ -13,13 +13,13 @@ const Doctor = () => {
                     height: "10vh",
                 }}
             >
-                <h1>Doctors</h1>
+                <h1>My Lotteries</h1>
             </div>
-            <div className="container">
-                <DoctorPage />
+             <div>
+                <ClientLotteries />
             </div>
         </>
     );
 };
 
-export default Doctor;
+export default ClientLotteriesPage;

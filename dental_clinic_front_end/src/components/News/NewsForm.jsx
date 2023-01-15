@@ -22,7 +22,8 @@ const NewsForm = () => {
     };
     console.log(newsPost);
 
-    NewsService.addNews(newsPost)
+    NewsService.addNews(newsPost);
+    window.location.reload();
    
   };
 

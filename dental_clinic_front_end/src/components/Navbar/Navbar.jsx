@@ -46,7 +46,7 @@ const NavBar = () => {
                                         </Dropdown.Menu>
                                     </Dropdown>
                                     <Nav>
-                                        <Nav.Link href="/clients"  id ="users">
+                                        <Nav.Link href="/clients"  id ="clients">
                                             <PeopleIcon />
                                             Clients
                                         </Nav.Link>
@@ -119,8 +119,8 @@ const NavBar = () => {
                                             <Dropdown.Item href="/profile" id="myAccount">
                                                 My Account
                                             </Dropdown.Item>
-                                            <Dropdown.Item href="/my-treatments" id="myTreatments">
-                                                <HealingIcon />  My Treatments
+                                            <Dropdown.Item href="/my-lotteries" id="myLotteries">
+                                                <HealingIcon />  My Lotteries
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>

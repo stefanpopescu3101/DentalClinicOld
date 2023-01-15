@@ -14,7 +14,7 @@ public interface IClientService {
     ClientDTO getClientById(Integer id);
     Client getClient(String username);
     Role saveRole(Role role);
-    void enterLottery(ClientDTO loggedIn, Integer lotteryID);
+    void enterLottery(Client loggedIn, Integer lotteryID);
     void addRole(String username,String roleName);
     boolean addClient(ClientDTO client);
     boolean editClient(ClientDTO client);

@@ -3,6 +3,7 @@ package com.example.dentalclinic.dal;
 import com.example.dentalclinic.Models.Client;
 import com.example.dentalclinic.Models.Lottery;
 import com.example.dentalclinic.dalInterfaces.ILotteryDAL;
+import com.example.dentalclinic.repoInterfaces.IClientRepository;
 import com.example.dentalclinic.repoInterfaces.ILotteryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,22 +14,24 @@ import java.util.List;
 @Transactional
 public class LotteryDAL implements ILotteryDAL {
 
-    private final ILotteryRepository repo;
+    private final ILotteryRepository lotteryRepo;
+    private final IClientRepository clientRepo;
 
     @Autowired
-    public LotteryDAL(ILotteryRepository repo)
+    public LotteryDAL(ILotteryRepository lotteryRepo, IClientRepository clientRepo)
     {
-        this.repo=repo;
+        this.lotteryRepo=lotteryRepo;
+        this.clientRepo = clientRepo;
     }
 
     @Override
     public List<Lottery> getAllLotteries() {
-        return repo.findAll();
+        return lotteryRepo.findAll();
     }
 
     @Override
     public Lottery getLotteryById(Integer id) {
-        return repo.findById(id).get();
+        return lotteryRepo.findById(id).get();
     }
 
     @Override
@@ -37,10 +40,20 @@ public class LotteryDAL implements ILotteryDAL {
     }
 
     @Override
+    public List<Lottery> getLotteriesByUsername(String username) {
+        Client client = this.clientRepo.findByUsername(username);
+        if(client != null)
+        {
+            return lotteryRepo.findClientLotteries(client.getId());
+        }
+        return null;
+    }
+
+    @Override
     public boolean createLottery(Lottery lottery) {
         if(lottery!=null)
         {
-            repo.save(lottery);
+            lotteryRepo.save(lottery);
             return true;
         }
         return  false;
@@ -54,7 +67,7 @@ public class LotteryDAL implements ILotteryDAL {
             updatedLottery.setDescription(lottery.getDescription());
             updatedLottery.setCapacity(lottery.getCapacity());
             updatedLottery.setAttendees(lottery.getAttendees());
-            repo.save(updatedLottery);
+            lotteryRepo.save(updatedLottery);
             return true;
         }
         return false;
@@ -64,7 +77,7 @@ public class LotteryDAL implements ILotteryDAL {
     public boolean deleteLottery(Integer id) {
         if(getLotteryById(id).getId() == id)
         {
-            repo.delete(getLotteryById(id));
+            lotteryRepo.delete(getLotteryById(id));
             return true;
         }
         return false;

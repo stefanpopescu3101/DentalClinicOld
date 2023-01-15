@@ -3,6 +3,8 @@ import React from "react";
 import AuthService from "../Services/AuthService";
 import TreatmentService from "../Services/TreatmentService";
 import TreatmentList from "./TreatmentList";
+import Slider from "../Slider/Slider";
+import TreatmentTable from "./TreatmentTable";
 
 function TreatmentPage() {
     const [treatments, setTreatments] = useState([]);
@@ -15,9 +17,31 @@ function TreatmentPage() {
 
     return (
         <div>
+            {AuthService.getCurrentUser() !== null &&
+                AuthService.getCurrentUser().roles.includes("[ROLE_ADMIN]") && (
+                    <>
+                        <TreatmentTable/>
+                    </>
+                )}
+
             {AuthService.getCurrentUser() === null && (
-                <TreatmentList treatments={treatments}></TreatmentList>
+                <>
+                    <Slider />
+                    <br />
+                    <div className="container">
+                        <h1>News</h1>
+                        <br />
+                        <TreatmentList treatments={treatments} />
+                    </div>
+                </>
             )}
+
+            {AuthService.getCurrentUser() !== null &&
+                AuthService.getCurrentUser().roles.includes("[ROLE_USER]") && (
+                    <>
+                        <TreatmentList treatments={treatments} />
+                    </>
+                )}
         </div>
     );
 }

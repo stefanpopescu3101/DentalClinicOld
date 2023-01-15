@@ -62,6 +62,16 @@ public class LotteryController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/clientLotteries/{username}")
+    public ResponseEntity<List<LotteryDTO>> getClientLotteries(@PathVariable(value = "username")  String username){
+        var clients = service.getLotteriesByUsername(username);
+        if(clients != null)
+        {
+            return ResponseEntity.ok().body(clients);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
     @PostMapping()
     public ResponseEntity<LotteryDTO> createLottery(@RequestBody LotteryDTO lottery) {

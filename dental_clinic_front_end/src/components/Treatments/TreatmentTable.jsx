@@ -5,34 +5,34 @@ import { IconButton } from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import { Modal } from "react-bootstrap";
 import AddIcon from "@mui/icons-material/Add";
-import DoctorService from "../Services/DoctorService";
-import DoctorForm from "./DoctorForm";
+import TreatmentService from "../Services/TreatmentService";
+import TreatmentForm from "./TreatmentForm";
 
-export default function DoctorTable() {
+export default function TreatmentTable() {
   const [showPost, setShowPost] = useState(false);
   const handleClosePost = () => setShowPost(false);
   const handleShowPostForm = () => setShowPost(true);
 
-  const [doctors, setDoctors] = useState([]);
+  const [treatments, setTreatments] = useState([]);
 
   useEffect(() => {
-    DoctorService.getDoctors().then((response) => {
-      setDoctors(response.data);
+    TreatmentService.getTreatments().then((response) => {
+      setTreatments(response.data);
     });
   }, []);
 
   // eslint-disable-next-line
-  doctors.map((post) => {
+  treatments.map((treatment) => {
     // eslint-disable-next-line
-     post["id"] = post.id;
+    treatment["id"] = treatment.id;
   });
 
   const columns = [
     { field: "title", headerName: "Title", flex: 1 },
-    { field: "lastName", headerName: "Last name", flex: 1 },
-    { field: "firstName", headerName: "Last name", flex: 1 },
-    { field: "phone", headerName: "Phone", flex: 1 },
-    { field: "email", headerName: "Email", flex: 1 },
+    { field: "description", headerName: "Description", flex: 1 },
+    { field: "duration", headerName: "Duration", flex: 1 },
+    { field: "price", headerName: "Price", flex: 1 },
+    { field: "doctorID", headerName: "Doctor", flex: 1 },
 
     {
       field: "Actions",
@@ -55,10 +55,10 @@ export default function DoctorTable() {
   ];
 
   const handleDelete = (id) => {
-    DoctorService.deleteDoctor(id)
+    TreatmentService.deleteTreatment(id)
       .then((response) => {
         if (response.data !== null) {
-          alert("Doctor deleted successfully.");
+          alert("Treatment deleted successfully.");
           window.location.reload();
         }
       });
@@ -89,10 +89,10 @@ export default function DoctorTable() {
           size="lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title>Doctor information</Modal.Title>
+            <Modal.Title>Treatment information</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <DoctorForm />
+            <TreatmentForm />
           </Modal.Body>
         </Modal>
       </>
@@ -100,7 +100,7 @@ export default function DoctorTable() {
       <br />
       <DataGrid
         density="comfortable"
-        rows={doctors}
+        rows={treatments}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

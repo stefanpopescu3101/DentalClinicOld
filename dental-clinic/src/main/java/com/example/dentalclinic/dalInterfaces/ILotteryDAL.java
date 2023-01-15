@@ -10,6 +10,7 @@ public interface ILotteryDAL {
     Lottery getLotteryById(Integer id);
 
     List<Client> viewAttendees(Lottery lottery);
+    List<Lottery> getLotteriesByUsername(String username);
     boolean createLottery(Lottery lottery);
     boolean editLottery(Lottery lottery);
     boolean deleteLottery(Integer id);

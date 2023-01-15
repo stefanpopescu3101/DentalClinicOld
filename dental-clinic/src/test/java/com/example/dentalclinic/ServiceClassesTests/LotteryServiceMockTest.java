@@ -29,6 +29,9 @@ public class LotteryServiceMockTest {
     @Mock
     private ILotteryDAL lotteryDAL;
 
+    @Mock
+    private IClientDAL clientDAL;
+
 
     @BeforeEach
     public void setUp()
@@ -57,7 +60,7 @@ public class LotteryServiceMockTest {
     public void getAllLotteriesTest_ReturnList()
     {
         //arrange
-        LotteryService service = new LotteryService(lotteryDAL, new LotteryConverter(), new ClientConverter());
+        LotteryService service = new LotteryService(lotteryDAL, clientDAL, new LotteryConverter(), new ClientConverter());
 
         //act
         List<LotteryDTO> lotteryDTOS = service.getAllLotteries();
@@ -72,7 +75,7 @@ public class LotteryServiceMockTest {
     public void getLotteryById()
     {
         //arrange
-        LotteryService service = new LotteryService(lotteryDAL, new LotteryConverter(), new ClientConverter());
+        LotteryService service = new LotteryService(lotteryDAL,clientDAL, new LotteryConverter(), new ClientConverter());
         List<Client> clients = List.of(
                 new Client(1,"test1","test", "075555555", "test@test.com", false),
                 new Client(2,"test2","test", "075555555", "test@test.com", false),
@@ -94,7 +97,7 @@ public class LotteryServiceMockTest {
     {
 
         //arrange
-        LotteryService service = new LotteryService(lotteryDAL, new LotteryConverter(), new ClientConverter());
+        LotteryService service = new LotteryService(lotteryDAL,clientDAL,new LotteryConverter(), new ClientConverter());
 
         //act
         List<LotteryDTO> lotteryDTOS = service.getAllLotteries();
@@ -108,7 +111,7 @@ public class LotteryServiceMockTest {
     public void addLottery()
     {
         //arrange
-        LotteryService service = new LotteryService(lotteryDAL, new LotteryConverter(), new ClientConverter());
+        LotteryService service = new LotteryService(lotteryDAL, clientDAL, new LotteryConverter(), new ClientConverter());
 
         //act
         List<Integer> clients = List.of(
@@ -129,7 +132,7 @@ public class LotteryServiceMockTest {
     @Test
     public void updateLottery() {
         //arrange
-        LotteryService service = new LotteryService(lotteryDAL, new LotteryConverter(), new ClientConverter());
+        LotteryService service = new LotteryService(lotteryDAL, clientDAL, new LotteryConverter(), new ClientConverter());
 
         //act
         List<Integer> clients = List.of(

@@ -17,6 +17,11 @@ class LotteryService {
             headers: authHeader()
         });
     }
+    getLotteriesOfUser(username) {
+        return axios.get(LOTTERY_API_BASE_URL + "/clientLotteries/" + username, {
+            headers: authHeader(),
+        });
+    }
     async editLottery(lottery) {
         return axios.put(LOTTERY_API_BASE_URL, lottery, {
             headers: authHeader()

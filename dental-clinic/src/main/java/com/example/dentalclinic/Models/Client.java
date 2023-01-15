@@ -46,7 +46,7 @@ public class Client {
     private @Getter @Setter Collection<Role> roles = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(targetEntity=Lottery.class, cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity=Lottery.class, cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
     private @Getter @Setter Collection<Lottery> lotteries = new ArrayList<>();
 
     public Client(){

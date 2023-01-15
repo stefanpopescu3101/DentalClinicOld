@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -63,14 +64,13 @@ public class ClientController {
 
     }
 
-    @PostMapping("/enterLottery/{id}")
-    public ResponseEntity<LotteryDTO> enterLottery(@PathVariable(value = "id")  Integer id) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Client loggedInUser = this.service.getClient(authentication.getName());
+    @PostMapping("/enterLottery/{username}/{id}")
+    public ResponseEntity<LotteryDTO> enterLottery(@PathVariable(value = "id")  Integer id, @PathVariable(value = "username") String username) {
+        Client client = this.service.getClient(username);
         if (id == null) {
             return ResponseEntity.notFound().build();
         } else {
-            service.enterLottery(converter.entityToDto(loggedInUser),id);
+            service.enterLottery(client,id);
             return ResponseEntity.ok().build();
         }
 
@@ -86,6 +86,17 @@ public class ClientController {
             return ResponseEntity.notFound().build();
         }
 
+    }
+
+    @GetMapping("/profile/{username}")
+    //GET at http://localhost:8080/users/100
+    public ResponseEntity<ClientDTO> getUserByUsername(@PathVariable("username") String username) {
+        ClientDTO user = converter.entityToDto(this.service.getClient(username));
+        if(user != null) {
+            return ResponseEntity.ok().body(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/sign-up")

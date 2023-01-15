@@ -29,7 +29,7 @@ public class Lottery {
     @Column(name = "nrOfClients")
     private @Getter @Setter Integer nrOfClients;
     @JsonIgnore
-    @OneToMany(targetEntity=Client.class, cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity=Client.class, cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
     private @Getter @Setter Collection<Client> attendees = new ArrayList<>();
 
     public Lottery(Integer id, String name, Integer capacity, List<Client> attendees) {

@@ -1,5 +1,6 @@
 import React from "react";
 import AuthService from "../Services/AuthService";
+import DoctorTable from "./DoctorTable";
 
 function DoctorPage() {
     return (
@@ -8,7 +9,7 @@ function DoctorPage() {
                 AuthService.getCurrentUser().roles.includes("[ROLE_ADMIN]") && (
                     <>
                         <div className="container">
-                            <DoctorPage></DoctorPage>
+                            <DoctorTable></DoctorTable>
                         </div>
                     </>
                 )}

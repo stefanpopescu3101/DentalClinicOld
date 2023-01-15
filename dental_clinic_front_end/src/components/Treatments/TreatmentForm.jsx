@@ -3,69 +3,30 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import TreatmentsService from "../Services/TreatmentService";
-
+import DoctorService from "../Services/DoctorService";
 
 const PostTreatment = () => {
 
-
-    const [doctorItems, setDoctor] = useState([]);
-    const [selectedTitle, setSelectedTitle] = useState([]);
-
-    const [formatItems, setFormats] = useState([]);
-    const [selectedFormats, setSelectFormats] = useState([]);
-
-    const [roomItems, setRooms] = useState([]);
-    const [selectedRoom, setSelectedRoom] = useState(null);
-
-    const [projectionItems, setProjection] = useState([]);
-    const [selectedProjection, setSelectedProjection] = useState(null);
-
-    const [file,setFile] = useState(null);
-
-    const onChangeHandler=event=>{
-        setFile(event.target.files[0])
-    }
-
+    const [doctors, setDoctors] = useState([]);
+    const [selectedDoctor, setSelectedDoctor] = useState(null);
 
     useEffect(() => {
-        TreatmentsService.getTreatments().then((response) => {
-            setGenre(response.data);
+        DoctorService.getDoctors().then((response) => {
+            setDoctors(response.data);
         });
-        TreatmentsService.getFormats().then((response) => {
-            setFormats(response.data);
-        });
-
-
     }, []);
-
 
     const treatmentTitle = useRef();
     const treatmentPrice = useRef();
     const treatmentDoctorId = useRef();
-    const treatmentDoctorName = useRef();
     const treatmentDuration = useRef();
     const treatmentDescription = useRef();
 
-
-    const handleChangeTitle = (e) => {
-        let obj = e.target.value; //title object
-
-        setSelectedTitle(obj);
-    };
-    const handleChangePrice = (e) => {
-        let obj = e.target.value; //price object
-
-        setSelect(obj);
-    };
-    const handleChangeDoctorName = (e) => {
-        let obj = e.target.value; //doctorName object
-
-        setSelectedRoom(obj);
-    };
-    const handleChangeDoctorId = (e) => {
+    const handleChangeDoctor = (e) => {
         let obj = e.target.value;
 
-        setSelectedProjection(obj);
+        setSelectedDoctor(JSON.parse(obj));
+        console.log(obj);
     };
 
     const handleSubmit = (e) => {
@@ -73,27 +34,21 @@ const PostTreatment = () => {
 
         const treatmentTitleRef = treatmentTitle.current.value;
         const treatmentPriceRef = treatmentPrice.current.value;
-        const treatmentDoctorIdRef = treatmentDoctorId.current.value;
-        const treatmentDoctorNameRef = treatmentDoctorName.current.value;
+        const treatmentDoctorIdRef = selectedDoctor;
         const treatmentDurationRef = treatmentDuration.current.value;
         const treatmentDescriptionRef = treatmentDescription.current.value;
 
 
         const treatment = {
             title: treatmentTitleRef,
-            price: treatmentPriceRef,
-            doctorId: treatmentDoctorIdRef,
-            doctorName: treatmentDoctorNameRef,
-            duration: treatmentDurationRef,
+            price: parseInt(treatmentPriceRef),
+            doctorID: treatmentDoctorIdRef,
+            duration: parseInt(treatmentDurationRef),
             description: treatmentDescriptionRef,
 
         };
-        console.log(treatment);
-
-        const data = new FormData();
-        data.append('file', file);
-        data.append('jsonFileVo', JSON.stringify(treatment));
-        TreatmentsService.addTreatment(data);
+        TreatmentsService.addTreatment(treatment);
+        window.location.reload();
     };
 
     return (
@@ -111,34 +66,27 @@ const PostTreatment = () => {
                 </Form.Group>
                 <br />
                 <Form.Group>
-                    <Form.Label>Doctor Name: </Form.Label>
+                    <Form.Label>Room: </Form.Label>
                     <br />
-                    <Form.Control as="select" onChange={handleChangeDoctorName} id="doctorName" required>
-                        <option value=""> -- Select a doctor -- </option>
-                        {genreItems.map((option, index) => (
-                            <option key={index} value={option} ref={treatmentDoctorName}>
-                                {option}
+                    <Form.Control
+                        as="select"
+                        onChange={handleChangeDoctor}
+                        required
+                        id="doctor"
+                    >
+                        <option value=""> -- Select a room -- </option>
+                        {doctors.map((option, index) => (
+                            <option
+                                key={index}
+                                value={option.id}
+                                ref={treatmentDoctorId}
+                            >
+                                {option.title} {option.lastName}
                             </option>
                         ))}
                     </Form.Control>
                 </Form.Group>
                 <br />
-                <Form.Group>
-                    <Form.Label>Doctor Id: </Form.Label>
-                    <Form.Control
-                        type="text"
-                        ref={treatmentDoctorId}
-                        id="doctorId"
-                        placeholder="Select the ..."
-                        required
-                    />
-                </Form.Group>
-                <br />
-                <Form.Group>
-                    <label htmlFor='image'>Image</label>
-                    <input type="file" id ="inputFile" name="file" accept="image/png, image/jpeg, image/jpg" onChange={onChangeHandler} required/>
-                </Form.Group>
-
                 <Form.Group>
                     <Form.Label>Price: </Form.Label>
                     <Form.Control
@@ -174,9 +122,6 @@ const PostTreatment = () => {
                     />
 
                 </Form.Group>
-
-
-
                 <br />
                 <Button variant="primary" type="submit" id="submit">
                     Submit

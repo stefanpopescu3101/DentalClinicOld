@@ -1,8 +1,10 @@
 package com.example.dentalclinic.service;
 
+import com.example.dentalclinic.Models.Client;
 import com.example.dentalclinic.Models.Lottery;
 import com.example.dentalclinic.converters.ClientConverter;
 import com.example.dentalclinic.converters.LotteryConverter;
+import com.example.dentalclinic.dalInterfaces.IClientDAL;
 import com.example.dentalclinic.dalInterfaces.ILotteryDAL;
 import com.example.dentalclinic.dto.ClientDTO;
 import com.example.dentalclinic.dto.LotteryDTO;
@@ -20,13 +22,14 @@ public class LotteryService implements ILotteryService {
 
     private final ILotteryDAL dal;
     private final LotteryConverter lotteryConverter;
-
+    private final IClientDAL clientDAL;
     private final ClientConverter clientConverter;
 
     @Autowired
-    public LotteryService(ILotteryDAL dal, LotteryConverter lotteryConverter, ClientConverter clientConverter)
+    public LotteryService(ILotteryDAL dal, IClientDAL clientDAL, LotteryConverter lotteryConverter, ClientConverter clientConverter)
     {
         this.dal = dal;
+        this.clientDAL = clientDAL;
         this.lotteryConverter = lotteryConverter;
         this.clientConverter = clientConverter;
     }
@@ -55,6 +58,12 @@ public class LotteryService implements ILotteryService {
     public List<ClientDTO> viewAttendees(Integer id) {
         LotteryDTO lotteryDTO = this.getLotteryById(id);
         return clientConverter.entityToDto(dal.viewAttendees(lotteryConverter.dtoToEntity(lotteryDTO)));
+    }
+
+    @Override
+    public List<LotteryDTO> getLotteriesByUsername(String username) {
+        ClientDTO dto = clientConverter.entityToDto(this.clientDAL.getUser(username));
+        return lotteryConverter.entityToDto(dal.getLotteriesByUsername(dto.getUsername()));
     }
 
     @Override

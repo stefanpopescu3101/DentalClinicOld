@@ -11,6 +11,9 @@ import SignOut from "./pages/signOut";
 import Lottery from "./pages/lotteries";
 import NotFound from "./pages/pageNotFound";
 import Doctor from "./pages/doctor";
+import Client from "./pages/client";
+import ClientLotteriesPage from "./pages/clientLotteries";
+import Profile from "./components/Client/Profile";
 
 function App() {
   return (
@@ -23,14 +26,12 @@ function App() {
                 <Route path ="/treatments" exact component={Treatments} />
                 <Route path ="/lotteries" exact component={Lottery} />
                 <Route path ="/doctors" exact component={Doctor}/>
+                <Route path ="/clients" exact component={Client}/>
+                <Route path ="/profile" exact component={Profile}/>
+                <Route path ="/my-lotteries" exact component={ClientLotteriesPage}/>
                 <Route path ="/sign-in" exact component={SignIn} />
                 <Route path ="/sign-up" exact component={SignUp} />
                 <Route path ="/sign-out" exact component={SignOut} />
-                {/*<Route path = "/treatments" render={() => <Treatments />} />*/}
-                {/*<Route path = "/lotteries" render={() => <Lottery />} />*/}
-                {/*<Route path = "/sign-in" render={() => <SignIn />} />*/}
-                {/*<Route path = "/sign-up" render={() => <SignUp />} />*/}
-                {/*<Route path = "/sign-out" render={() => <SignOut />} />*/}
                 <Route component={NotFound} />
             </Switch>
         </Router>

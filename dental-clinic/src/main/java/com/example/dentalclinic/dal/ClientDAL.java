@@ -74,6 +74,7 @@ public class ClientDAL implements IClientDAL, UserDetailsService
 
     }
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Client client = userRepo.findByUsername(username);

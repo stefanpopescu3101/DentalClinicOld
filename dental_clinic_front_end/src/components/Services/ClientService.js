@@ -8,6 +8,13 @@ class ClientService {
     async getClients() {
         return await axios.get(CLIENT_API_BASE_URL);
     }
+
+    async getClientByUsername(username) {
+        return axios.get(CLIENT_API_BASE_URL + "/profile/" + username, {
+            headers: authHeader(),
+        });
+    }
+
     async getClientById(clientId) {
         return await axios.get(CLIENT_API_BASE_URL + "/" + clientId);
     }
@@ -21,8 +28,8 @@ class ClientService {
             headers: authHeader()
         });
     }
-    async enterLottery(lotteryId) {
-        return axios.post(CLIENT_API_BASE_URL + "/enterLottery/" + lotteryId, {
+    async enterLottery(lotteryId,username) {
+        return axios.post(CLIENT_API_BASE_URL + "/enterLottery/" + username + "/" + lotteryId, {
             headers: authHeader()
         });
     }
